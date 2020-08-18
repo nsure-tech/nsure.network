@@ -11,31 +11,11 @@
 
                 <div class="icon-wrapper">
                     <ul class="icon-list-wrapper">
-                        <li>
-                            <div class="img-box" @click="getProductItem(0)" :class="{'active': activeIndex === 0}">
-                                <img src="../assets/images/logo1@2x.png" alt="">
+                        <li v-for="(item, index) in productList" :key="index">
+                            <div class="img-box" @click="getProductItem(item, index)" :class="{'active': activeIndex === index}">
+                                <img :src="item.logo" alt="">
                             </div>
                         </li>
-                        <!-- <li>
-                            <div class="img-box">
-                                <img src="../assets/images/logo2@2x.png" alt="">
-                            </div>
-                        </li>
-                        <li>
-                            <div class="img-box">
-                                <img src="../assets/images/logo3@2x.png" alt="">
-                            </div>
-                        </li>
-                        <li>
-                            <div class="img-box">
-                                <img src="../assets/images/logo4@2x.png" alt="">
-                            </div>
-                        </li>
-                        <li>
-                            <div class="img-box">
-                                <img src="../assets/images/logo5@2x.png" alt="">
-                            </div>
-                        </li> -->
                     </ul>
                 </div>
             </el-card>
@@ -161,16 +141,10 @@
 <script>
 import Dialog from '@/components/Dialog'
 import { mapState, mapMutations, mapActions } from 'vuex'
-import { productToken } from '@/config'
 export default {
     data() {
         return {
-            list: [
-                {
-                    name: 'test',
-                    addr: productToken
-                }
-            ],
+            productList: [],
             daysBlocks: 5760,
             activeIndex: -1,
             productAddr: '',
@@ -191,43 +165,137 @@ export default {
             return this.$math.format(this.$math.multiply(this.feeRate, this.blocks, Number(this.amount)), {precision: 14})
         }
     },
+    mounted() {
+        this.getProducts()
+    },
     methods: {
         ...mapMutations(['UPDATE_DIALOG_VISBLE']),
-        ...mapActions(['confirm', 'getProduct']),
+        ...mapActions(['buyInsurance', 'getProduct', 'getProductList', 'getProviderList']),
         showDiaglog() {
-            // if (this.activeIndex === -1) {
-            //     this.$message.error('Please select products first')
-            //     return
-            // }
-            // if (this.productAddr == '') {
-            //     this.$message.error('Enter Address')
-            //     return
-            // }
-            // if (this.amount == '') {
-            //     this.$message.error('Enter Amount')
-            //     return
-            // }
+            if (this.activeIndex === -1) {
+                this.$message.error('Please select products first')
+                return
+            }
+            if (this.productAddr == '') {
+                this.$message.error('Please select products first')
+                return
+            }
+            if (this.amount == '') {
+                this.$message.error('Enter Amount')
+                return
+            }
+            if (Number(this.amount) < Math.pow(10, -6)) {
+                this.$message.error('Amount must more than 10e-6')
+                return
+            }
+            if (this.days == '') {
+                this.$message.error('Enter Days')
+                return
+            }
+            if (this.cost === 0) {
+                this.$message.error('Cost of Cover 0')
+                return
+            }
             this.UPDATE_DIALOG_VISBLE(true)
         },
-        sumbit() {
-            const payload = {
+        async sumbit() {
+            const amount = Number(this.amount)
+            let payload = {
                 productAddr: this.productAddr,
                 amount: this.web3.utils.toWei(this.amount),
-                blocks: this.blocks,
-                ipAddrs: [this.account],
-                ipAmount: [Number(this.amount)]
+                blocks: this.blocks
             }
-            this.confirm(payload)
+            try{
+                const res = await this.getProviderList({ page: 1 })
+                console.log({res})
+                console.log(this.cost)
+                const providerList = res.data
+                const newList = this.sortKey(providerList, "update_time");
+                if (newList.length === 0) {
+                    this.$message.error('Not enough')
+                    return
+                }
+
+                let total = 0
+                newList.forEach((item, index) => {
+                    if (index < 3) {
+                        total = total + item.total_amount
+                    }
+                })
+
+                if (total < amount) {
+                    this.$message.error('Not enough')
+                    return
+                }
+
+                const ipAddrs = []
+                const ipAmount = []
+                let num = amount
+                newList.forEach((item, index) => {
+                    if (index < 3) {
+                        if (num > 0) {
+                            console.log(num <= item.total_amount)
+                            if(num <= item.total_amount) {
+                                console.log('qqqq')
+                                ipAddrs.push(item.address)
+                                ipAmount.push(this.web3.utils.toWei(num.toString()))
+                                num = num - item.total_amount
+                            } else {
+                                console.log('bbbbb')
+                                ipAddrs.push(item.address)
+                                ipAmount.push(this.web3.utils.toWei(item.total_amount.toString()))
+                                num = num - item.total_amount
+                            }
+                        }
+                    }
+                })
+
+                payload = {
+                    ...payload,
+                    ipAddrs,
+                    ipAmount,
+                    cost: this.web3.utils.toWei(this.cost)
+                }
+                this.UPDATE_DIALOG_VISBLE(false)
+                const result = await this.buyInsurance(payload)
+                console.log(result)
+            } catch (e) {
+                throw Error(e)
+            }
         },
-        async getProductItem(index) {
+        close() {
+            this.activeIndex = -1
+            this.productAddr = ''
+            this.days = ''
+            this.amount = ''
+            this.feeRate = 0
+        },
+        sortKey(array, key) {
+            return array.sort(function(a, b) {
+                var x = a[key];
+                var y = b[key];
+                return x > y ? -1 : x < y ? 1 : 0;
+            });
+        },
+        async getProductItem(item, index) {
             this.activeIndex = index
-            const productAddr = this.list[index].addr
+            const productAddr = item.address
             this.productAddr = productAddr
             try {
                 const result = await this.getProduct(productAddr)
-                this.feeRate = this.$math.multiply(Number(result[1]), Math.pow(10, -18))
-            } catch (error) {
-                console.log(error)
+                this.feeRate = this.$math.multiply(Number(result[1]), Math.pow(10, -18)) // -18
+                console.log(result)
+            } catch (e) {
+                throw Error(e)
+            }
+        },
+        async getProducts() {
+            try{
+                const res = await this.getProductList({ page: 1 })
+                console.log(res)
+                this.productList = res.data
+            }catch(e){
+                throw Error(e)
             }
         }
     }
@@ -261,9 +329,10 @@ export default {
 .icon-wrapper {
     .icon-list-wrapper {
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
         li {
-            flex: 1;
+            width: 100px;
+            margin-right: 10px;
 
             .img-box {
                 width: 100px;
@@ -272,7 +341,9 @@ export default {
                 cursor: pointer;
 
                 img {
-                    width: 100%;
+                    display: block;
+                    width: 100px;
+                    height: 100px;
                 }
 
                 &:hover,
@@ -291,13 +362,13 @@ export default {
         justify-content: space-between;
 
         input {
-            flex: 0.8;
+            width: 310px;
             border: none;
             font-size: 28px;
         }
 
         span {
-            flex: 0.2;
+            flex: 1;
             color: rgba(0, 0, 0, .6);
             text-align: right;
             font-size: 28px;

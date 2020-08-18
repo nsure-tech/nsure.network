@@ -1,15 +1,12 @@
-// const nsureToken = '0xf433ba573A37E8d26603Ad80b24386D52BB05092'
-// const productToken = '0x50b55c3E5f6552607d295CadaCc4948F660c1312'
-// const stakingToken = '0xF649aB945554F100e9e2D8b359890017f6fD27d8'
-
+// token配置
 const token = {
-    nsure: '0xf433ba573A37E8d26603Ad80b24386D52BB05092',
-    product: '0x50b55c3E5f6552607d295CadaCc4948F660c1312',
-    staking: '0xF649aB945554F100e9e2D8b359890017f6fD27d8',
-    att: '0x5320780949ef9c0191ae1b4261575d23deaf455e'
+    Nsure: '0x617f23A48B81cA5D28517552A1a006712Bb5b717',
+    Staking: '0x199005Ca72e2FbbC21A32CCc13bd45a1ca253Baa',
+    Att: '0x5320780949ef9c0191ae1b4261575d23deaf455e',
+    Nsr: '0x7a90bdD2271ae4f704e436Ce77615a5f3C35ad3B'
 }
 
-export const nsureToken = token.nsure;
-export const productToken = token.product;
-export const stakingToken = token.staking;
-export const attToken = token.att;
+export const nsureToken = token.Nsure;
+export const stakingToken = token.Staking;
+export const attToken = token.Att;
+export const nsrToken = token.Nsr;

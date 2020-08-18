@@ -72,13 +72,13 @@
     <Dialog width="400px">
       <div slot="body" class="custom-dialog-body">
         <div class="img-box">
-          <img src="../assets/images/icon-eth.png" width="38" alt="">
+          <img src="../assets/images/logo@2x.png" width="38" alt="">
         </div>
-        <div class="dice-name">Nsure</div>
+        <div class="dice-name">Nsr</div>
         <div class="dice-input-box">
           <div class="input-box">
             <div class="max-box">Max</div>
-            <input type="number" v-model="number" placeholder="Amount in Nsure">
+            <input type="number" v-model="number" placeholder="Amount in Nsr">
           </div>
         </div>
       </div>

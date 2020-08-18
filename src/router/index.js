@@ -22,7 +22,7 @@ const routes = [
   },
   {
     path: '/liquidity-mining',
-    name: 'LiquidityMining',
+    name: 'Liquidity Mining',
     component: () => import(/* webpackChunkName: "LiquidityMining" */ '../views/LiquidityMining.vue')
   }
 ]

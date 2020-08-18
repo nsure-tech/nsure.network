@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Web3 from 'web3'
 import erc20TokenContractAbi from 'human-standard-token-abi'
+import Apis from '@/request/index'
 import { nsureToken, stakingToken, attToken } from '@/config'
 const web3 = new Web3(Web3.givenProvider);
 
@@ -75,11 +76,12 @@ export default new Vuex.Store({
       try {
         console.log(payload)
         const { web3, account } = state
+        const { cost, productAddr, amount, blocks, ipAddrs, ipAmount } = payload
         const myContract = new web3.eth.Contract(nsureAbi, nsureToken);
-        const result = await myContract.methods.buyInsurance(payload).send({
-          from: account
+        const result = await myContract.methods.buyInsurance(productAddr, amount, blocks, ipAddrs, ipAmount).send({
+          from: account,
+          value: cost
         })
-        console.log(result)
         return Promise.resolve(result)
       } catch (e) {
         return Promise.reject(e)
@@ -104,10 +106,8 @@ export default new Vuex.Store({
         const { web3, account } = state
         const myContract = new web3.eth.Contract(nsureAbi, nsureToken);
         const result = await myContract.methods.withdrawLiquidity(value).send({
-          from: account,
-          value
+          from: account
         })
-        console.log(result)
         return Promise.resolve(result)
       } catch (e) {
         return Promise.reject(e)
@@ -127,7 +127,7 @@ export default new Vuex.Store({
       try {
         const { web3, account } = state
         const myContract = new web3.eth.Contract(nsureAbi, nsureToken);
-        const result = await myContract.methods.InsuranceProviderPoolInfo().call({
+        const result = await myContract.methods.InsuranceProviderPoolInfo(account).call({
           from: account
         })
         return Promise.resolve(result)
@@ -252,5 +252,21 @@ export default new Vuex.Store({
         return Promise.reject(e)
       }
     },
+    async getProductList(_, payload) {
+      try {
+        const result = await Apis.getProductList(payload)
+        return Promise.resolve(result)
+      } catch (e) {
+        return Promise.reject(e)
+      }
+    },
+    async getProviderList(_, payload) {
+      try {
+        const result = await Apis.getProviderList(payload)
+        return Promise.resolve(result)
+      } catch (e) {
+        return Promise.reject(e)
+      }
+    }
   },
 })

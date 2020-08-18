@@ -219,7 +219,8 @@ export default {
                 this.eth.locked = this.web3.utils.fromWei(res.locked)
 
                 const InsuranceProviderPoolInfo = await this.InsuranceProviderPoolInfo()
-                console.log('InsuranceProviderPoolInfo', InsuranceProviderPoolInfo)
+                this.eth.max = this.web3.utils.fromWei(InsuranceProviderPoolInfo.avail)
+                console.log('InsuranceProviderPoolInfo', InsuranceProviderPoolInfo, this.eth.max)
             }catch(e){
                 //TODO handle the exception
             }

@@ -36,9 +36,9 @@ class ApiRequest {
         // 请求拦截器
         this.axios.interceptors.request.use(
             (config) => {
-                if (localStorage.getItem('token')) {
-                    config.headers.common['token'] = localStorage.getItem('token');
-                }
+                // if (localStorage.getItem('token')) {
+                //     config.headers.common['token'] = localStorage.getItem('token');
+                // }
                 return Promise.resolve(config);
             },
             (error) => {
@@ -50,10 +50,9 @@ class ApiRequest {
         this.axios.interceptors.response.use(
             (response) => {
                 const { status, data } = response;
-                const { Status, Data } = data;
-                console.log(data)
-                if (status === 200 && Status === true) {
-                    return Promise.resolve(Data);
+                const { code, result } = data;
+                if (status === 200 && code === 0) {
+                    return Promise.resolve(result);
                 }
                 return Promise.reject(data);
             },

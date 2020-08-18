@@ -11,7 +11,7 @@
                         {{$route.name}}
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item v-for="(list, index) in menuList" :key="index" @click.native="handle(list.path)">{{list.name}}</el-dropdown-item>
+                        <el-dropdown-item v-for="(list, index) in menuList" :key="index" @click.native="handle(list)">{{list.name}}</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
@@ -39,8 +39,11 @@ export default {
         }
     },
     methods: {
-        handle(path) {
-            this.$router.push(path)
+        handle(item) {
+            if (item.name === this.$route.name) {
+                return
+            }
+            this.$router.push(item.path)
         },
         home() {
             this.$router.push('/')

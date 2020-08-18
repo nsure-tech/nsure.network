@@ -1,19 +1,20 @@
 const DOMAIN_CONFIG = {
     // 开发
     dev: {
-        common: 'http://58.84.7.20:8081',
+        common: 'http://120.79.189.25:9502',
     },
     // 测试
     test: {
-        common: 'http://58.84.7.20:8081',
+        common: 'http://120.79.189.25:9502',
     },
     // 正式
     prod: {
-        common: 'http://58.84.7.20:8081',
+        common: 'http://120.79.189.25:9502',
     }
 };
 
 let domain = DOMAIN_CONFIG.dev;
+console.log('VUE_APP_CURRENTMODE', process.env.VUE_APP_CURRENTMODE)
 
 if (process.env.VUE_APP_CURRENTMODE === 'test') {
     domain = DOMAIN_CONFIG.test;
@@ -23,4 +24,4 @@ if (process.env.VUE_APP_CURRENTMODE === 'prod') {
     domain = DOMAIN_CONFIG.prod;
 }
 
-export const baseURL = `${domain.common}/api`;
+export const baseURL = domain.common;

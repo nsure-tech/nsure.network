@@ -3,12 +3,14 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import math from './utils'
+import http from './request/index'
 import './assets/styles/reset.less'
 import 'element-ui/lib/theme-chalk/index.css'
 import { Card, Button, Message, Dialog, Dropdown, DropdownMenu, DropdownItem } from 'element-ui'
 
 Vue.config.productionTip = false
 Vue.prototype.$math = math;
+Vue.prototype.$http = http;
 Vue.prototype.$message = Message;
 
 Vue.use(Card)
