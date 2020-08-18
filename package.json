@@ -1,17 +1,24 @@
 {
-  "name": "nsure-web",
+  "name": "nsure",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "start": "vue-cli-service serve --mode dev",
+    "build:test": "vue-cli-service build --mode test",
+    "build:prod": "vue-cli-service build --mode prod",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "babel-plugin-component": "^1.1.1",
     "core-js": "^3.6.5",
+    "element-ui": "^2.13.2",
+    "human-standard-token-abi": "^2.0.0",
+    "mathjs": "^7.1.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
-    "vuex": "^3.4.0"
+    "vuex": "^3.4.0",
+    "web3": "^1.2.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.0",
@@ -20,6 +27,8 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "less": "^3.0.4",
+    "less-loader": "^5.0.0",
     "vue-template-compiler": "^2.6.11"
   }
 }

@@ -1,0 +1,379 @@
+<template>
+    <div class="pages-wrapper insure">
+        <div class="card-wrapper">
+            <el-card class="box-card left-card">
+                <div slot="header" class="card-header">
+                    <span>Details</span>
+                </div>
+                <div class="description mb-20">
+                    <p>Smart Contract to Cover</p>
+                </div>
+
+                <div class="icon-wrapper">
+                    <ul class="icon-list-wrapper">
+                        <li>
+                            <div class="img-box" @click="getProductItem(0)" :class="{'active': activeIndex === 0}">
+                                <img src="../assets/images/logo1@2x.png" alt="">
+                            </div>
+                        </li>
+                        <!-- <li>
+                            <div class="img-box">
+                                <img src="../assets/images/logo2@2x.png" alt="">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="img-box">
+                                <img src="../assets/images/logo3@2x.png" alt="">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="img-box">
+                                <img src="../assets/images/logo4@2x.png" alt="">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="img-box">
+                                <img src="../assets/images/logo5@2x.png" alt="">
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+            </el-card>
+
+            <el-card class="box-card right-card">
+                <div slot="header" class="clearfix">
+                    <span></span>
+                </div>
+
+                <div class="input-wrapper">
+                    <el-card class="box-card min-card">
+                        <div slot="header" class="clearfix">
+                            <span>Smart Contract address</span>
+                        </div>
+                        <div class="input-content max">
+                            <div class="addr" v-if="productAddr">{{productAddr}}</div>
+                            <div class="addr addr-empty" v-else>Enter Address</div>
+                        </div>
+                    </el-card>
+                </div>
+            </el-card>
+        </div>
+
+        <div class="card-wrapper">
+            <el-card class="box-card left-card">
+                <div slot="header" class="card-header">
+                    <span>Cover Amount</span>
+                </div>
+                <div class="description height-80">
+                    <p>The amount you will receive in the event of a valid claim as a fixed-sum payout.</p>
+                </div>
+
+                <div class="input-wrapper">
+                    <el-card class="box-card min-card">
+                        <div slot="header" class="clearfix">
+                            <span>Amount</span>
+                        </div>
+                        <div class="input-content">
+                            <input type="number" v-model="amount" placeholder="0">
+                            <span>ETH</span>
+                        </div>
+                    </el-card>
+                </div>
+            </el-card>
+
+            <el-card class="box-card right-card">
+                <div slot="header" class="clearfix">
+                    <span>Time</span>
+                </div>
+                <div class="description height-80">
+                    <p>Enter the length of time you want to be covered forCover is live immediately from the purchasetransaction confirmation.</p>
+                </div>
+
+                <div class="input-wrapper">
+                    <el-card class="box-card min-card">
+                        <div slot="header" class="clearfix">
+                            <span>Cover Period</span>
+                        </div>
+                        <div class="input-content">
+                            <input type="number" v-model="days" placeholder="0">
+                            <span>DAYS</span>
+                        </div>
+                    </el-card>
+                </div>
+            </el-card>
+        </div>
+
+        <div class="confirm-wrapper">
+            <button class="button" @click="showDiaglog">confirm</button>
+        </div>
+
+        <Dialog width="546px">
+            <div slot="body" class="custom-dialog-body">
+                <ul class="confirm-dialog-wrapper">
+                    <li>
+                        <div class="confirm-list-item">
+                            <div class="title">Cost of Cover</div>
+                            <div class="content">
+                                <div class="content-item color-02D396">{{cost}}</div>
+                                <div class="content-item">ETH</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="confirm-list-item">
+                            <div class="title">Smart Contract Address</div>
+                            <div class="content">
+                                 <div class="content-item font-16">{{productAddr}}</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="confirm-list-item">
+                            <div class="title">Fixed Payout</div>
+                            <div class="content">
+                                 <div class="content-item">{{amount}}</div>
+                                 <div class="content-item fixed-payout">
+                                    <span>ETH</span>
+                                    <span class="min">Paid in ETH｜Current Value（$394.11）</span>
+                                 </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="confirm-list-item">
+                            <div class="title">Cover Period</div>
+                            <div class="content">
+                                 <div class="content-item">{{days}}</div>
+                                 <div class="content-item">DAYS</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div slot="footer">
+                <button class="button close" @click="UPDATE_DIALOG_VISBLE(false)">Close</button>
+                <button class="button confirm-button" @click="sumbit">confirm</button>
+            </div>
+        </Dialog>
+    </div>
+</template>
+
+<script>
+import Dialog from '@/components/Dialog'
+import { mapState, mapMutations, mapActions } from 'vuex'
+import { productToken } from '@/config'
+export default {
+    data() {
+        return {
+            list: [
+                {
+                    name: 'test',
+                    addr: productToken
+                }
+            ],
+            daysBlocks: 5760,
+            activeIndex: -1,
+            productAddr: '',
+            days: '',
+            amount: '',
+            feeRate: 0
+        }
+    },
+    components: {
+        Dialog,
+    },
+    computed: {
+        ...mapState(['web3', 'account']),
+        blocks() {
+            return this.$math.format(this.$math.multiply(this.daysBlocks, Number(this.days)), {precision: 14})
+        },
+        cost() {
+            return this.$math.format(this.$math.multiply(this.feeRate, this.blocks, Number(this.amount)), {precision: 14})
+        }
+    },
+    methods: {
+        ...mapMutations(['UPDATE_DIALOG_VISBLE']),
+        ...mapActions(['confirm', 'getProduct']),
+        showDiaglog() {
+            // if (this.activeIndex === -1) {
+            //     this.$message.error('Please select products first')
+            //     return
+            // }
+            // if (this.productAddr == '') {
+            //     this.$message.error('Enter Address')
+            //     return
+            // }
+            // if (this.amount == '') {
+            //     this.$message.error('Enter Amount')
+            //     return
+            // }
+            this.UPDATE_DIALOG_VISBLE(true)
+        },
+        sumbit() {
+            const payload = {
+                productAddr: this.productAddr,
+                amount: this.web3.utils.toWei(this.amount),
+                blocks: this.blocks,
+                ipAddrs: [this.account],
+                ipAmount: [Number(this.amount)]
+            }
+            this.confirm(payload)
+        },
+        async getProductItem(index) {
+            this.activeIndex = index
+            const productAddr = this.list[index].addr
+            this.productAddr = productAddr
+            try {
+                const result = await this.getProduct(productAddr)
+                this.feeRate = this.$math.multiply(Number(result[1]), Math.pow(10, -18))
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+}
+</script>
+
+<style lang="less" scoped>
+.insure {
+    padding: 48px 0;
+}
+
+.description {
+    width: 50%;
+    margin-bottom: 40px;
+
+    p {
+        font-size: 14px;
+        line-height: 1.5;
+        color: rgba(0, 0, 0, .6);
+    }
+
+    &.mb-20 {
+        margin-bottom: 20px;
+    }
+}
+
+.input-wrapper {
+    padding: 0 40px;
+}
+
+.icon-wrapper {
+    .icon-list-wrapper {
+        display: flex;
+        justify-content: space-between;
+        li {
+            flex: 1;
+
+            .img-box {
+                width: 100px;
+                height: 100px;
+                border-radius: 10px;
+                cursor: pointer;
+
+                img {
+                    width: 100%;
+                }
+
+                &:hover,
+                &.active {
+                    background-color: #F5F6F7;
+                }
+            }
+        }
+    }
+}
+
+.min-card {
+    .input-content {
+        padding: 20px 0;
+        display: flex;
+        justify-content: space-between;
+
+        input {
+            flex: 0.8;
+            border: none;
+            font-size: 28px;
+        }
+
+        span {
+            flex: 0.2;
+            color: rgba(0, 0, 0, .6);
+            text-align: right;
+            font-size: 28px;
+        }
+
+        .addr {
+            font-size: 16px;
+        }
+
+        .addr-empty {
+            opacity: 0.6;
+        }
+
+        &.max {
+            input {
+                flex: 1;
+            }
+        }
+    }
+}
+
+.confirm-wrapper {
+    padding: 28px 0 20px;
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+        margin: 0;
+    }
+}
+
+.height-80 {
+    height: 70px;
+}
+
+.confirm-button {
+    width: 200px;
+}
+
+.color-02D396 {
+    color: #02D396;
+}
+
+.font-16 {
+    font-size: 16px;
+}
+
+.confirm-dialog-wrapper {
+    li {
+        color: #000;
+        padding: 20px 0;
+        border-bottom: 1px solid #F5F6F7;
+
+        .confirm-list-item {
+            .title {
+                text-align: left;
+                font-size: 14px;
+                line-height: 1.5;
+                margin-bottom: 10px;
+            }
+
+            .content {
+                display: flex;
+                font-size: 20px;
+                line-height: 1.5;
+                justify-content: space-between;
+
+                .fixed-payout {
+                    .min {
+                        font-size: 14px;
+                        margin-left: 40px;
+                    }
+                }
+            }
+        }
+    }
+}
+</style>
+
