@@ -32,7 +32,7 @@
                         </div>
                         <div class="input-content max">
                             <div class="addr" v-if="productAddr">{{productAddr}}</div>
-                            <div class="addr addr-empty" v-else>Enter Address</div>
+                            <!-- <div class="addr addr-empty" v-else>Enter Address</div> -->
                         </div>
                     </el-card>
                 </div>
@@ -376,6 +376,8 @@ export default {
 
         .addr {
             font-size: 16px;
+            height: 20px;
+            line-height: 20px;
         }
 
         .addr-empty {

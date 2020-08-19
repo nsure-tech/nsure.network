@@ -74,11 +74,11 @@
         <div class="img-box">
           <img src="../assets/images/logo@2x.png" width="38" alt="">
         </div>
-        <div class="dice-name">Nsr</div>
+        <div class="dice-name">Nsure</div>
         <div class="dice-input-box">
           <div class="input-box">
             <div class="max-box">Max</div>
-            <input type="number" v-model="number" placeholder="Amount in Nsr">
+            <input type="number" v-model="number" placeholder="Amount in Nsure">
           </div>
         </div>
       </div>

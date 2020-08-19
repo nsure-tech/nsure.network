@@ -1,9 +1,9 @@
 // token配置
 const token = {
-    Nsure: '0x617f23A48B81cA5D28517552A1a006712Bb5b717',
-    Staking: '0x199005Ca72e2FbbC21A32CCc13bd45a1ca253Baa',
+    Nsure: '0x29Da51603f293998964e634279Dae97619564F72',
+    Staking: '0x4efcc6659ABF1F7d03111b5cbFaddeA70e3880dB',
     Att: '0x5320780949ef9c0191ae1b4261575d23deaf455e',
-    Nsr: '0x7a90bdD2271ae4f704e436Ce77615a5f3C35ad3B'
+    Nsr: '0x2c97Ed724d07aE8c7b8C63230F1EC99BA7E029C2'
 }
 
 export const nsureToken = token.Nsure;

@@ -14,7 +14,7 @@
                                 <img src="../assets/images/icon1@2x.png" width="80" alt="">
                             </div>
                             <h3>Expected ETH</h3>
-                            <h2>{{eth.avail}}/{{eth.locked}}</h2>
+                            <h2>{{eth.avail}}</h2>
                             <h4>Deposit ETH Earn Nsure</h4>
 
                             <div class="liqudity-button">

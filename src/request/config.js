@@ -5,11 +5,11 @@ const DOMAIN_CONFIG = {
     },
     // 测试
     test: {
-        common: 'http://120.79.189.25:9502',
+        common: 'https://test.goomtu.com',
     },
     // 正式
     prod: {
-        common: 'http://120.79.189.25:9502',
+        common: 'https://test.goomtu.com',
     }
 };
 
