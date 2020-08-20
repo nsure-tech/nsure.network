@@ -7,6 +7,7 @@ import { nsureToken, stakingToken, nsrToken } from '@/config'
 const web3 = new Web3(Web3.givenProvider);
 
 const nsureAbi = require('@/config/nsureAbi.json')
+const nsureTokenAbi = require('@/config/nsureTokenAbi.json')
 const stakingAbi = require('@/config/stakingAbi.json')
 
 Vue.use(Vuex)
@@ -91,6 +92,11 @@ export default new Vuex.Store({
       try {
         const { web3, account } = state
         const myContract = new web3.eth.Contract(nsureAbi, nsureToken);
+        // const estimateGas = await myContract.methods.addLiquidityEth().estimateGas({
+        //   from: account,
+        //   value
+        // })
+        // console.log({ estimateGas })
         const result = await myContract.methods.addLiquidityEth().send({
           from: account,
           value
@@ -138,9 +144,11 @@ export default new Vuex.Store({
     // 获取分红
     async getDividends({ state }) {
       try {
-        const { web3 } = state
+        const { web3, account } = state
         const myContract = new web3.eth.Contract(stakingAbi, stakingToken);
-        const result = await myContract.methods.getDividends().call()
+        const result = await myContract.methods.getDividends().send({
+          from: account
+        })
         console.log(result)
         return Promise.resolve(result)
       } catch (e) {
@@ -152,13 +160,10 @@ export default new Vuex.Store({
       try {
         const { web3, account } = state
         const erc20TokenContract = new web3.eth.Contract(erc20TokenContractAbi, nsrToken);
-        // const allowance = await erc20TokenContract.methods.allowance(account, stakingToken).call({
+        // const estimateGas = await erc20TokenContract.methods.approve(stakingToken, value).estimateGas({
         //   from: account
         // })
-        // if (allowance < value) {
-        //   dispatch('staking', value)
-        //   return
-        // }
+        // console.log({ estimateGas })
         const result = await erc20TokenContract.methods.approve(stakingToken, value).send({
           from: account
         })
@@ -173,6 +178,10 @@ export default new Vuex.Store({
       try {
         const { web3, account } = state
         const myContract = new web3.eth.Contract(stakingAbi, stakingToken);
+        // const estimateGas = await myContract.methods.staking(value).estimateGas({
+        //   from: account
+        // })
+        // console.log({ estimateGas })
         const result = await myContract.methods.staking(value).send({
           from: account
         })
@@ -247,6 +256,73 @@ export default new Vuex.Store({
         const { web3, account } = state
         const myContract = new web3.eth.Contract(stakingAbi, stakingToken);
         const result = await myContract.methods.shareOf(account).call({
+          from: account
+        })
+        return Promise.resolve(result)
+      } catch (e) {
+        return Promise.reject(e)
+      }
+    },
+    // Capital reward(eth) 不传参表示获取Total reward余额，传参地址表示获取某地址的reward余额
+    async takerBalanceOf({ state }, address) {
+      try {
+        const { web3, account } = state
+        const myContract = new web3.eth.Contract(nsureTokenAbi, nsrToken);
+        let result
+        if (address) {
+          result = await myContract.methods.takerBalanceOf(address).call({
+            from: account
+          })
+        } else {
+          result = await myContract.methods.takerBalanceOf().call({
+            from: account
+          })
+        }
+        return Promise.resolve(result)
+      } catch (e) {
+        return Promise.reject(e)
+      }
+    },
+    // 带参数表示提现金额，不带参数表示提现所有
+    async takerWithdraw({ state }, value) {
+      try {
+        const { web3, account } = state
+        const myContract = new web3.eth.Contract(nsureTokenAbi, nsrToken);
+        const result = await myContract.methods.takerWithdraw(value).send({
+          from: account,
+          value
+        })
+        return Promise.resolve(result)
+      } catch (e) {
+        return Promise.reject(e)
+      }
+    },
+    // Liquidity mining reward(nsure) 不传参表示获取Total reward余额，传参地址表示获取某地址的reward余额
+    async makerBalanceOf({ state }, address) {
+      try {
+        const { web3, account } = state
+        const myContract = new web3.eth.Contract(nsureTokenAbi, nsrToken);
+        let result
+        if (address) {
+          result = await myContract.methods.makerBalanceOf(address).call({
+            from: account
+          })
+        } else {
+          result = await myContract.methods.makerBalanceOf().call({
+            from: account
+          })
+        }
+        return Promise.resolve(result)
+      } catch (e) {
+        return Promise.reject(e)
+      }
+    },
+    // 带参数表示提现金额，不带参数表示提现所有
+    async makerWithdraw({ state }) {
+      try {
+        const { web3, account } = state
+        const myContract = new web3.eth.Contract(nsureTokenAbi, nsrToken);
+        const result = await myContract.methods.makerWithdraw().send({
           from: account
         })
         return Promise.resolve(result)

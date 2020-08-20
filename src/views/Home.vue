@@ -12,21 +12,21 @@
               <ul class="content-list" v-if="type === 'ETH'">
                 <li>
                   <span>Tolal Reward：</span>
-                  <span>0</span>
+                  <span>{{eth.tolalReward}}</span>
                 </li>
                 <li>
                   <span>Earned：</span>
-                  <span>0</span>
+                  <span>{{eth.earned}}</span>
                 </li>
               </ul>
               <ul class="content-list" v-else>
                 <li>
                   <span>Tolal Reward：</span>
-                  <span>0</span>
+                  <span>{{nsure.tolalReward}}</span>
                 </li>
                 <li>
                   <span>Earned：</span>
-                  <span>0</span>
+                  <span>{{nsure.earned}}</span>
                 </li>
               </ul>
             </div>
@@ -55,14 +55,15 @@
         <div class="dice-input-box">
           <div class="input-box">
             <!-- <div class="max-box">Max</div> -->
-            <input type="number" v-model="number" placeholder="Amount in Nsure">
+            <input type="number" v-model="number" v-if="type === 'ETH'" placeholder="Amount">
+            <p v-if="type === 'NSURE'" class="withdraw-all">Withdraw all</p>
           </div>
         </div>
       </div>
       <div slot="footer">
         <button class="button close" @click="close">Close</button>
-        <button class="button" v-if="type === 'ETH'" @click="sumbit('ETH')">Withdraw</button>
-        <button class="button" v-if="type === 'NSURE'" @click="sumbit('NSURE')">Withdraw</button>
+        <button class="button" v-if="type === 'ETH'" @click="sumbit()">Withdraw</button>
+        <button class="button" v-if="type === 'NSURE'" @click="doMakerWithdraw">Withdraw</button>
       </div>
     </Dialog>
   </div>
@@ -70,20 +71,46 @@
 
 <script>
 import Dialog from '@/components/Dialog'
-import { mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
+import { nsrToken } from '@/config'
 export default {
   name: 'Home',
   data() {
     return {
       type: 'ETH',
-      number: ''
+      number: '',
+      eth: {
+        tolalReward: 0,
+        earned: 0
+      },
+      nsure: {
+        tolalReward: 0,
+        earned: 0
+      }
+    }
+  },
+  watch: {
+    type(value) {
+      if (value === 'ETH') {
+        this.getTakerBalanceOf()
+      } else {
+        this.getMakerBalanceOf()
+      }
     }
   },
   components: {
     Dialog
   },
+  computed: {
+    ...mapState(['balance', 'web3'])
+  },
+  mounted() {
+    this.getTakerBalanceOf()
+    this.getMakerBalanceOf()
+  },
   methods: {
     ...mapMutations(['UPDATE_DIALOG_VISBLE']),
+    ...mapActions(['takerBalanceOf', 'makerBalanceOf', 'takerWithdraw', 'makerWithdraw']),
     handle(type) {
       this.type = type
     },
@@ -94,7 +121,50 @@ export default {
       this.number = ''
       this.UPDATE_DIALOG_VISBLE(false)
     },
-    sumbit() {}
+    async getTakerBalanceOf() {
+      try{
+        const tolalReward = await this.takerBalanceOf()
+        const earned = await this.takerBalanceOf(nsrToken)
+        this.eth.tolalReward = tolalReward
+        this.eth.earned = earned
+      }catch(e){
+        console.log(e)
+      }
+    },
+    async getMakerBalanceOf() {
+      try{
+        const tolalReward = await this.makerBalanceOf()
+        const earned = await this.makerBalanceOf(nsrToken)
+        this.nsure.tolalReward = tolalReward
+        this.nsure.earned = earned
+      }catch(e){
+        console.log(e)
+      }
+    },
+    async sumbit() {
+      try{
+        const num = Number(this.number)
+        if (this.number == '' || num === 0) {
+          this.$message.error('Please enter number frist')
+          return
+        }
+        if (num < 0) {
+          this.$message.error('Must be greater than 0')
+          return
+        }
+        const value = this.web3.utils.toWei(num.toString())
+        await this.takerWithdraw(value)
+      }catch(e){
+        console.log(e)
+      }
+    },
+    async doMakerWithdraw () {
+      try{
+        await this.makerWithdraw() 
+      }catch(e){
+        console.log(e)
+      }
+    }
   }
 }
 </script>
@@ -174,5 +244,11 @@ export default {
       padding-top: 24px;
     }
   }
+}
+
+.withdraw-all {
+  text-align: left;
+  line-height: 40px;
+  opacity: 0.6;
 }
 </style>

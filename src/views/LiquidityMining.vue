@@ -192,11 +192,11 @@ export default {
                 this.$message.error('Must be greater than 0')
                 return
             }
-            if (num > this.dialogData.max) {
-                this.$message.error('Excess balance')
-                console.log('超出余额')
-                return
-            }
+            // if (num > this.dialogData.max) {
+            //     this.$message.error('Excess balance')
+            //     console.log('超出余额')
+            //     return
+            // }
             const value = this.web3.utils.toWei(num.toString())
             console.log({ value })
             try {
