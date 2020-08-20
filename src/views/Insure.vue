@@ -159,10 +159,10 @@ export default {
     computed: {
         ...mapState(['web3', 'account']),
         blocks() {
-            return this.$math.format(this.$math.multiply(this.daysBlocks, Number(this.days)), {precision: 14})
+            return Number(this.$math.format(this.$math.multiply(this.daysBlocks, Number(this.days)), {precision: 16, notation: 'fixed'}))
         },
         cost() {
-            return this.$math.format(this.$math.multiply(this.feeRate, this.blocks, Number(this.amount)), {precision: 14})
+            return Number(this.$math.format(this.$math.multiply(this.feeRate, this.blocks, Number(this.amount)), {precision: 16, notation: 'fixed'}))
         }
     },
     mounted() {
@@ -236,12 +236,10 @@ export default {
                         if (num > 0) {
                             console.log(num <= item.total_amount)
                             if(num <= item.total_amount) {
-                                console.log('qqqq')
                                 ipAddrs.push(item.address)
                                 ipAmount.push(this.web3.utils.toWei(num.toString()))
                                 num = num - item.total_amount
                             } else {
-                                console.log('bbbbb')
                                 ipAddrs.push(item.address)
                                 ipAmount.push(this.web3.utils.toWei(item.total_amount.toString()))
                                 num = num - item.total_amount
@@ -254,7 +252,7 @@ export default {
                     ...payload,
                     ipAddrs,
                     ipAmount,
-                    cost: this.web3.utils.toWei(this.cost)
+                    cost: this.web3.utils.toWei(this.cost.toString())
                 }
                 this.UPDATE_DIALOG_VISBLE(false)
                 const result = await this.buyInsurance(payload)
