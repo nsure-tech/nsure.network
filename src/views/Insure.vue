@@ -6,7 +6,7 @@
                     <span>Details</span>
                 </div>
                 <div class="description mb-20">
-                    <p>Smart Contract to Cover</p>
+                    <p>Choose a smart contract to cover</p>
                 </div>
 
                 <div class="icon-wrapper">
@@ -63,7 +63,7 @@
 
             <el-card class="box-card right-card">
                 <div slot="header" class="clearfix">
-                    <span>Time</span>
+                    <span>Cover period</span>
                 </div>
                 <div class="description height-80">
                     <p>Enter the length of time you want to be covered forCover is live immediately from the purchasetransaction confirmation.</p>
@@ -72,7 +72,7 @@
                 <div class="input-wrapper">
                     <el-card class="box-card min-card">
                         <div slot="header" class="clearfix">
-                            <span>Cover Period</span>
+                            <span>Period</span>
                         </div>
                         <div class="input-content">
                             <input type="number" v-model="days" placeholder="0">

@@ -10,6 +10,4 @@ const config = {
 }
 const math = create(all, config)
 
-
-
 export default math

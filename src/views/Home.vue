@@ -5,11 +5,11 @@
         <el-card class="box-card">
           <div class="home-card-item">
             <div class="home-button">
-              <span :class="{active: active === 0}" @click="handle(0)">Insure Reward</span>
-              <span :class="{active: active === 1}" @click="handle(1)">Liquidity Reward</span>
+              <span :class="{active: type === 'ETH'}" @click="handle('ETH')">Capital reward(eth)</span>
+              <span :class="{active: type === 'NSURE'}" @click="handle('NSURE')">Liquidity mining reward(nsure)</span>
             </div>
             <div class="home-card-content">
-              <ul class="content-list" v-if="!active">
+              <ul class="content-list" v-if="type === 'ETH'">
                 <li>
                   <span>Tolal Reward：</span>
                   <span>0</span>
@@ -31,27 +31,70 @@
               </ul>
             </div>
             <div class="button-wrapper">
-              <button class="button">Withdraw</button>
+              <button class="button" @click="open">Withdraw</button>
             </div>
           </div>
         </el-card>
       </div>
     </div>
+
+    <Dialog width="400px">
+      <div slot="body" class="custom-dialog-body">
+        <template v-if="type === 'ETH'">
+          <div class="img-box">
+            <img src="../assets/images/icon-eth.png" width="38" alt="">
+          </div>
+          <div class="dice-name">ETH</div>
+        </template>
+        <template v-if="type === 'NSURE'">
+          <div class="img-box">
+            <img src="../assets/images/logo@2x.png" width="38" alt="">
+          </div>
+          <div class="dice-name">Nsure</div>
+        </template>
+        <div class="dice-input-box">
+          <div class="input-box">
+            <!-- <div class="max-box">Max</div> -->
+            <input type="number" v-model="number" placeholder="Amount in Nsure">
+          </div>
+        </div>
+      </div>
+      <div slot="footer">
+        <button class="button close" @click="close">Close</button>
+        <button class="button" v-if="type === 'ETH'" @click="sumbit('ETH')">Withdraw</button>
+        <button class="button" v-if="type === 'NSURE'" @click="sumbit('NSURE')">Withdraw</button>
+      </div>
+    </Dialog>
   </div>
 </template>
 
 <script>
+import Dialog from '@/components/Dialog'
+import { mapMutations } from 'vuex'
 export default {
   name: 'Home',
   data() {
     return {
-      active: 0
+      type: 'ETH',
+      number: ''
     }
   },
+  components: {
+    Dialog
+  },
   methods: {
-    handle(value) {
-      this.active = value
-    }
+    ...mapMutations(['UPDATE_DIALOG_VISBLE']),
+    handle(type) {
+      this.type = type
+    },
+    open() {
+      this.UPDATE_DIALOG_VISBLE(true)
+    },
+    close() {
+      this.number = ''
+      this.UPDATE_DIALOG_VISBLE(false)
+    },
+    sumbit() {}
   }
 }
 </script>
@@ -73,11 +116,12 @@ export default {
 
         span {
           display: block;
-          width: 228px;
+          width: 260px;
           height: 50px;
           line-height: 50px;
           text-align: center;
           border-radius: 25px;
+          font-size: 16px;
           margin: 0 12px;
           cursor: pointer;
           font-weight: bold;

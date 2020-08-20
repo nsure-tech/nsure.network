@@ -24,7 +24,7 @@ export default {
     data() {
         return {
             menuList: [{
-                path: '/',
+                path: '/home',
                 name: 'Home'
             },{
                 path: '/insure',

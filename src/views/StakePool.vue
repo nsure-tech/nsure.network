@@ -33,7 +33,12 @@
         </ul>
         <div class="button-wrapper">
           <button class="button" @click="open('Stake')">Stake</button>
+          <button class="button" @click="getDividends">Dividends</button>
+        </div>
+        <div class="button-wrapper">
           <button class="button" @click="open('Withdraw')">Withdraw</button>
+          <button class="button" v-if="withdrawal && isTimes" @click="doWithdraw">Do Withdraw</button>
+          <button class="button disabled" v-else>Do Withdraw</button>
         </div>
       </el-card>
 
@@ -44,7 +49,7 @@
         <ul class="ul-list">
           <li>
             <div class="item">
-              <div class="left">Nsure Supply</div>
+              <div class="left">Total Supply</div>
               <div class="right">
                 <span>{{avail}}</span>Nsure
               </div>
@@ -52,7 +57,7 @@
           </li>
           <li>
             <div class="item">
-              <div class="left">Nsure Locked</div>
+              <div class="left">Staked Supply</div>
               <div class="right">
                 <span>{{locked}}</span>Nsure
               </div>
@@ -60,7 +65,7 @@
           </li>
           <li>
             <div class="item">
-              <div class="left">Pool Earnings</div>
+              <div class="left">Premium to share</div>
               <div class="right">
                 <span>{{earnings}}</span>ETH
               </div>
@@ -77,7 +82,7 @@
         <div class="dice-name">Nsure</div>
         <div class="dice-input-box">
           <div class="input-box">
-            <div class="max-box">Max</div>
+            <!-- <div class="max-box">Max</div> -->
             <input type="number" v-model="number" placeholder="Amount in Nsure">
           </div>
         </div>
@@ -85,7 +90,7 @@
       <div slot="footer">
         <button class="button close" @click="close">Close</button>
         <button class="button" v-if="dialogData.type === 'Stake'" @click="sumbit">Stake</button>
-        <button class="button" v-if="dialogData.type === 'Withdraw'">Withdraw</button>
+        <button class="button" v-if="dialogData.type === 'Withdraw'" @click="sumbit">Withdraw</button>
       </div>
     </Dialog>
   </div>
@@ -108,22 +113,36 @@ export default {
         reward: 0,
         avail: 0,
         locked: 0,
-        earnings: 0
+        earnings: 0,
+        withdrawal: 0,
+        pendingAtBlock: null,
+        blockNumber: null,
+        block21Days: 120960 // 86400 * 21 / 15
     }
   },
   components: {
     Dialog,
   },
   computed: {
-    ...mapState(['balance', 'web3'])
+    ...mapState(['balance', 'web3']),
+    isTimes() {
+      if(this.blockNumber && this.pendingAtBlock) {
+        return this.blockNumber - this.pendingAtBlock >= this.block21Days ? true : false
+      }
+      return false
+    }
   },
   mounted() {
     this.getDividends()
-    this.holdings()
+    this.getPool()
+    this.getPoolBalancesFn()
+    this.getInvestorInfoFn()
+    this.getBlockNumber()
+    this.getShareOf()
   },
   methods: {
     ...mapMutations(['UPDATE_DIALOG_VISBLE']),
-    ...mapActions(['getDividends', 'setApprove', 'pool', 'getPoolBalances', 'getInvestorInfo', 'shareOf', 'submitWithdrawProposal']),
+    ...mapActions(['getDividends', 'setApprove', 'pool', 'getPoolBalances', 'getInvestorInfo', 'shareOf', 'submitWithdrawProposal', 'doWithdraw', 'getDividends']),
     open(type) {
       let max = 0
       this.number = ''
@@ -146,20 +165,43 @@ export default {
         max: 0
       }
     },
-    async holdings() {
+    async getPool () {
       try{
         const poolRes = await this.pool()
-        console.log(poolRes)
         this.avail = this.web3.utils.fromWei(poolRes.avail)
         this.locked = this.web3.utils.fromWei(poolRes.locked)
-
+      }catch(e){
+        console.log(e)
+      }
+    },
+    async getPoolBalancesFn () {
+      try{
         const getPoolBalancesRes = await this.getPoolBalances()
         this.earnings = this.web3.utils.fromWei(getPoolBalancesRes[0])
-
+      }catch(e){
+        console.log(e)
+      }
+    },
+    async getInvestorInfoFn () {
+      try{
         const getInvestorInfoRes = await this.getInvestorInfo()
         this.holdingsLocked = this.web3.utils.fromWei(getInvestorInfoRes.withdrawal)
         this.delegate = this.web3.utils.fromWei(getInvestorInfoRes.invest)
-
+        this.withdrawal = this.web3.utils.fromWei(getInvestorInfoRes.withdrawal)
+        this.pendingAtBlock = Number(getInvestorInfoRes.pendingAtBlock)
+      }catch(e){
+        console.log(e)
+      }
+    },
+    async getBlockNumber () {
+      try{
+        this.blockNumber = await this.web3.eth.getBlockNumber()
+      }catch(e){
+        console.log(e)
+      }
+    },
+    async getShareOf () {
+      try{
         const shareOfRes = await this.shareOf()
         const scale = this.web3.utils.fromWei(shareOfRes[0]) / this.web3.utils.fromWei(shareOfRes[1])
         this.reward = this.earnings * scale

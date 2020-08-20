@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import Web3 from 'web3'
 import erc20TokenContractAbi from 'human-standard-token-abi'
 import Apis from '@/request/index'
-import { nsureToken, stakingToken, attToken } from '@/config'
+import { nsureToken, stakingToken, nsrToken } from '@/config'
 const web3 = new Web3(Web3.givenProvider);
 
 const nsureAbi = require('@/config/nsureAbi.json')
@@ -151,7 +151,7 @@ export default new Vuex.Store({
     async setApprove({ state, dispatch }, value) {
       try {
         const { web3, account } = state
-        const erc20TokenContract = new web3.eth.Contract(erc20TokenContractAbi, attToken);
+        const erc20TokenContract = new web3.eth.Contract(erc20TokenContractAbi, nsrToken);
         // const allowance = await erc20TokenContract.methods.allowance(account, stakingToken).call({
         //   from: account
         // })
@@ -207,6 +207,7 @@ export default new Vuex.Store({
         console.log(result)
         return Promise.resolve(result)
       } catch (e) {
+        console.log(e)
         return Promise.reject(e)
       }
     },
@@ -235,6 +236,7 @@ export default new Vuex.Store({
         const { web3, account } = state
         const myContract = new web3.eth.Contract(stakingAbi, stakingToken);
         const result = await myContract.methods.getInvestorInfo(account).call()
+        console.log(result)
         return Promise.resolve(result)
       } catch (e) {
         return Promise.reject(e)
