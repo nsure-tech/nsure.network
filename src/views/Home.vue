@@ -36,6 +36,28 @@
           </div>
         </el-card>
       </div>
+      <div class="home-content-item">
+        <el-card class="box-card">
+          <div class="home-card-item">
+              <div slot="header" class="card-header">
+                <span>Withdraw History</span>
+              </div>
+              <div class="histpry-table home-history">
+                <table>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Tx hash</th>
+                    </tr>
+                    <tr v-for="(item, index) in historyList" :key="index">
+                        <td>{{item.amount}}</td>
+                        <td>{{item.address}}</td>
+                    </tr>
+                </table>
+                <div class="no-data" v-if="historyList.length === 0">No Data</div>
+            </div>
+          </div>
+        </el-card>
+      </div>
     </div>
 
     <Dialog width="400px">
@@ -86,7 +108,9 @@ export default {
       nsure: {
         tolalReward: 0,
         earned: 0
-      }
+      },
+      page: 1,
+      historyList: []
     }
   },
   watch: {
@@ -102,11 +126,12 @@ export default {
     Dialog
   },
   computed: {
-    ...mapState(['balance', 'web3'])
+    ...mapState(['balance', 'web3', 'account'])
   },
   mounted() {
     this.getTakerBalanceOf()
     this.getMakerBalanceOf()
+    this.getRecords()
   },
   methods: {
     ...mapMutations(['UPDATE_DIALOG_VISBLE']),
@@ -125,8 +150,8 @@ export default {
       try{
         const tolalReward = await this.takerBalanceOf()
         const earned = await this.takerBalanceOf(nsrToken)
-        this.eth.tolalReward = tolalReward
-        this.eth.earned = earned
+        this.eth.tolalReward = this.web3.utils.fromWei(tolalReward)
+        this.eth.earned = this.web3.utils.fromWei(earned)
       }catch(e){
         console.log(e)
       }
@@ -135,8 +160,8 @@ export default {
       try{
         const tolalReward = await this.makerBalanceOf()
         const earned = await this.makerBalanceOf(nsrToken)
-        this.nsure.tolalReward = tolalReward
-        this.nsure.earned = earned
+        this.nsure.tolalReward = this.web3.utils.fromWei(tolalReward)
+        this.nsure.earned = this.web3.utils.fromWei(earned)
       }catch(e){
         console.log(e)
       }
@@ -164,6 +189,22 @@ export default {
       }catch(e){
         console.log(e)
       }
+    },
+    async getRecords() {
+      try{
+          const params = {
+              address: this.account, // acount
+              tran_type: 2,
+              record_type: 0,
+              page: this.page
+          }
+          const res = await this.$http.getRecords(params)
+          this.historyList = res.data
+          this.total = res.total
+          console.log(res)
+      }catch(e){
+          throw Error(e)
+      }
     }
   }
 }
@@ -179,6 +220,7 @@ export default {
 
     &-item {
       width: 50%;
+      margin: 0 10px;
 
       .home-button {
         display: flex;
@@ -238,6 +280,8 @@ export default {
     .box-card {
       border-radius: 30px;
       margin: 0;
+      height: 320px;
+      padding-bottom: 24px;
     }
 
     .home-card-item {
@@ -250,5 +294,18 @@ export default {
   text-align: left;
   line-height: 40px;
   opacity: 0.6;
+}
+
+.home-history {
+  margin-top: 10px;
+  max-height: 246px;
+  overflow-y: auto;
+  th,
+  td {
+    text-align: left;
+    &:last-child {
+      text-align: right;
+    }
+  }
 }
 </style>

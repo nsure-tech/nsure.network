@@ -13,9 +13,27 @@
                             <div class="icon-content">
                                 <img src="../assets/images/icon1@2x.png" width="80" alt="">
                             </div>
-                            <h3>Expected ETH</h3>
+                            <!-- <h3>Expected ETH</h3>
                             <h2>{{eth.avail}}</h2>
-                            <h4>Deposit ETH Earn Nsure</h4>
+                            <h4>Deposit ETH Earn Nsure</h4> -->
+                            <ul class="balance-list">
+                                <li>
+                                    <span>Pool balance: </span>
+                                    <span>{{eth.avail}}</span>
+                                </li>
+                                <li>
+                                    <span>Pool locked: </span>
+                                    <span>{{eth.locked}}</span>
+                                </li>
+                                <li>
+                                    <span>My balance: </span>
+                                    <span>0</span>
+                                </li>
+                                <li>
+                                    <span>My locked: </span>
+                                    <span>0</span>
+                                </li>
+                            </ul>
 
                             <div class="liqudity-button">
                                 <button class="button" @click="open('Withdraw')">Withdraw</button>
@@ -30,43 +48,24 @@
                             <div class="icon-content">
                                 <img src="../assets/images/icon2@2x.png" width="80" alt="">
                             </div>
-                            <h3>Expected USDT</h3>
-                            <h2>N/A</h2>
-                            <h4>Deposit USDT Earn Nsure</h4>
-
-                            <div class="liqudity-button">
-                                <button class="button disabled">Withdraw</button>
-                                <button class="button disabled">Deposit</button>
-                            </div>
-                        </div>
-                    </el-card>
-                </li>
-                <li>
-                    <el-card class="box-card">
-                        <div class="liqudity-mining-item">
-                            <div class="icon-content">
-                                <img src="../assets/images/icon3@2x.png" width="80" alt="">
-                            </div>
-                            <h3>Expected YCRV</h3>
-                            <h2>N/A</h2>
-                            <h4>Deposit YCRV Earn Nsure</h4>
-
-                            <div class="liqudity-button">
-                                <button class="button disabled">Withdraw</button>
-                                <button class="button disabled">Deposit</button>
-                            </div>
-                        </div>
-                    </el-card>
-                </li>
-                <li>
-                    <el-card class="box-card">
-                        <div class="liqudity-mining-item">
-                            <div class="icon-content">
-                                <img src="../assets/images/icon4@2x.png" width="80" alt="">
-                            </div>
-                            <h3>Expected AMPL</h3>
-                            <h2>N/A</h2>
-                            <h4>Deposit AMPL Earn Nsure</h4>
+                            <ul class="balance-list">
+                                <li>
+                                    <span>Pool balance: </span>
+                                    <span>0</span>
+                                </li>
+                                <li>
+                                    <span>Pool locked: </span>
+                                    <span>0</span>
+                                </li>
+                                <li>
+                                    <span>My balance: </span>
+                                    <span>0</span>
+                                </li>
+                                <li>
+                                    <span>My locked: </span>
+                                    <span>0</span>
+                                </li>
+                            </ul>
 
                             <div class="liqudity-button">
                                 <button class="button disabled">Withdraw</button>
@@ -81,26 +80,24 @@
                             <div class="icon-content">
                                 <img src="../assets/images/icon5@2x.png" width="80" alt="">
                             </div>
-                            <h3>Expected DAI</h3>
-                            <h2>N/A</h2>
-                            <h4>Deposit DAI Earn Nsure</h4>
-
-                            <div class="liqudity-button">
-                                <button class="button disabled">Withdraw</button>
-                                <button class="button disabled">Deposit</button>
-                            </div>
-                        </div>
-                    </el-card>
-                </li>
-                <li>
-                    <el-card class="box-card">
-                        <div class="liqudity-mining-item">
-                            <div class="icon-content">
-                                <img src="../assets/images/icon6@2x.png" width="80" alt="">
-                            </div>
-                            <h3>Expected USDC</h3>
-                            <h2>N/A</h2>
-                            <h4>Deposit USDC Earn Nsure</h4>
+                            <ul class="balance-list">
+                                <li>
+                                    <span>Pool balance: </span>
+                                    <span>0</span>
+                                </li>
+                                <li>
+                                    <span>Pool locked: </span>
+                                    <span>0</span>
+                                </li>
+                                <li>
+                                    <span>My balance: </span>
+                                    <span>0</span>
+                                </li>
+                                <li>
+                                    <span>My locked: </span>
+                                    <span>0</span>
+                                </li>
+                            </ul>
 
                             <div class="liqudity-button">
                                 <button class="button disabled">Withdraw</button>
@@ -110,6 +107,31 @@
                     </el-card>
                 </li>
             </ul>
+        </div>
+
+        <div class="history-wrapper">
+            <el-card class="box-card">
+                <div slot="header" class="card-header">
+                    <span>History</span>
+                </div>
+                <div class="histpry-table">
+                    <table>
+                        <tr>
+                            <th>Time</th>
+                            <th>Direction</th>
+                            <th>Token Amount</th>
+                            <th>Tx hash</th>
+                        </tr>
+                        <tr v-for="(item, index) in historyList" :key="index">
+                            <td>{{item.create_time}}</td>
+                            <td>{{item.desc}}</td>
+                            <td>{{item.amount}}</td>
+                            <td>{{item.address}}</td>
+                        </tr>
+                    </table>
+                    <div class="no-data" v-if="historyList.length === 0">No Data</div>
+                </div>
+            </el-card>
         </div>
         <Dialog width="400px">
             <div slot="body" class="custom-dialog-body">
@@ -148,17 +170,19 @@ export default {
                 avail: 0,
                 locked: 0,
                 max: 0
-            }
+            },
+            historyList: []
         }
     },
     components: {
         Dialog,
     },
     computed: {
-        ...mapState(['balance', 'web3'])
+        ...mapState(['balance', 'web3', 'account'])
     },
     mounted() {
         this.getEthPool()
+        this.getRecords()
     },
     methods: {
         ...mapMutations(['UPDATE_DIALOG_VISBLE']),
@@ -220,9 +244,8 @@ export default {
 
                 const InsuranceProviderPoolInfo = await this.InsuranceProviderPoolInfo()
                 this.eth.max = this.web3.utils.fromWei(InsuranceProviderPoolInfo.avail)
-                console.log('InsuranceProviderPoolInfo', InsuranceProviderPoolInfo, this.eth.max)
-            }catch(e){
-                //TODO handle the exception
+            } catch (error) {
+                throw Error(error)
             }
         },
         close() {
@@ -231,6 +254,22 @@ export default {
             this.dialogData = {
                 type: '',
                 max: 0
+            }
+        },
+        async getRecords() {
+            try{
+                const params = {
+                    address: this.account, // acount
+                    tran_type: 1,
+                    record_type: 0,
+                    page: this.page
+                }
+                const res = await this.$http.getRecords(params)
+                this.historyList = res.data
+                this.total = res.total
+                console.log(res)
+            }catch(e){
+                throw Error(e)
             }
         }
     }
@@ -265,7 +304,7 @@ export default {
             display: flex;
             flex-wrap: wrap;
 
-            li {
+            >li {
                 width: 320px;
                 margin: 24px 0;
 
@@ -292,6 +331,15 @@ export default {
                         color: rgba(0, 0, 0, 0.6);
                     }
 
+                    .balance-list {
+                        padding: 0 10px;
+                        li {
+                            margin-bottom: 10px;
+                            display: flex;
+                            justify-content: space-between;
+                        }
+                    }
+
                     .icon-content {
                         width: 100%;
                         display: flex;
@@ -302,7 +350,7 @@ export default {
                     .liqudity-button {
                         display: flex;
                         font-size: 14px;
-                        padding: 40px 0 20px;
+                        padding: 20px 0 20px;
                         justify-content: center;
 
                         button {
@@ -311,6 +359,18 @@ export default {
                         }
                     }
                 }
+
+            }
+        }
+    }
+
+    .history-wrapper {
+        margin: 0 110px;
+
+        .box-card {
+            border-radius: 30px;
+
+            .histpry-table {
 
             }
         }

@@ -87,6 +87,56 @@
             <button class="button" @click="showDiaglog">confirm</button>
         </div>
 
+        <div class="history-active">
+            <span :class="{ active: active }" @click="historyActive(1)">Transaction Record</span>
+            <span :class="{ active: !active }"  @click="historyActive(0)">My transaction</span>
+        </div>
+        <div class="history-wrapper">
+            <el-card class="box-card">
+                <div slot="header" class="card-header">
+                    <span>History</span>
+                </div>
+                <div class="histpry-table" v-if="active">
+                    <table>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Cover Amount</th>
+                            <th>Cover Period</th>
+                            <th>Tx hash</th>
+                            <th>Time</th>
+                        </tr>
+                        <tr v-for="(item, index) in historyList" :key="index">
+                            <td>{{item.record_sn}}</td>
+                            <td>{{item.amount}}</td>
+                            <td>{{item.provider_id}}</td>
+                            <td>{{item.address}}</td>
+                            <td>{{item.create_time}}</td>
+                        </tr>
+                    </table>
+                    <div class="no-data" v-if="historyList.length === 0">No Data</div>
+                </div>
+                <div class="histpry-table" v-else>
+                    <table>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Cover Amount</th>
+                            <th>Cover Period</th>
+                            <th>Tx hash</th>
+                            <th>Time</th>
+                        </tr>
+                        <!-- <tr v-for="(item, index) in historyList" :key="index">
+                            <td>{{item.record_sn}}</td>
+                            <td>{{item.amount}}</td>
+                            <td>{{item.provider_id}}</td>
+                            <td>{{item.address}}</td>
+                            <td>{{item.create_time}}</td>
+                        </tr> -->
+                    </table>
+                    <div class="no-data">No Data</div>
+                </div>
+            </el-card>
+        </div>
+
         <Dialog width="546px">
             <div slot="body" class="custom-dialog-body">
                 <ul class="confirm-dialog-wrapper">
@@ -150,7 +200,11 @@ export default {
             productAddr: '',
             days: '',
             amount: '',
-            feeRate: 0
+            feeRate: 0,
+            page: 1,
+            total: 0,
+            active: 1,
+            historyList: []
         }
     },
     components: {
@@ -279,6 +333,7 @@ export default {
             this.activeIndex = index
             const productAddr = item.address
             this.productAddr = productAddr
+            this.getRecords()
             try {
                 const result = await this.getProduct(productAddr)
                 this.feeRate = this.$math.multiply(Number(result[1]), Math.pow(10, -18)) // -18
@@ -290,8 +345,29 @@ export default {
         async getProducts() {
             try{
                 const res = await this.getProductList({ page: 1 })
-                console.log(res)
                 this.productList = res.data
+            }catch(e){
+                throw Error(e)
+            }
+        },
+        historyActive(active) {
+            this.active = active
+            if (active) {
+                this.getRecords()
+            }
+        },
+        async getRecords() {
+            try{
+                const params = {
+                    address: this.productAddr,
+                    tran_type: 0,
+                    record_type: 0,
+                    page: this.page
+                }
+                const res = await this.$http.getRecords(params)
+                this.historyList = res.data
+                this.total = res.total
+                console.log(res)
             }catch(e){
                 throw Error(e)
             }
@@ -443,6 +519,37 @@ export default {
                     }
                 }
             }
+        }
+    }
+}
+
+.history-wrapper {
+    .box-card {
+        margin: 0;
+    }
+}
+
+.history-active {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+
+    span {
+        display: block;
+        width: 200px;
+        height: 44px;
+        font-size: 20px;
+        line-height: 44px;
+        cursor: pointer;
+        text-align: center;
+        background: #fff;
+        border-radius: 5px;
+        margin: 0 10px;
+        opacity: 0.4;
+        box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+
+        &.active {
+            opacity: 1;
         }
     }
 }
