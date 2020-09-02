@@ -1,209 +1,114 @@
 <template>
-  <div class="pages-wrapper home">
-    <div class="home-content">
-      <div class="home-content-item">
-        <el-card class="box-card">
-          <div class="home-card-item">
-            <div class="home-button">
-              <span :class="{active: type === 'ETH'}" @click="handle('ETH')">Capital reward(eth)</span>
-              <span :class="{active: type === 'NSURE'}" @click="handle('NSURE')">Liquidity mining reward(nsure)</span>
-            </div>
-            <div class="home-card-content">
-              <ul class="content-list" v-if="type === 'ETH'">
-                <li>
-                  <span>Tolal Reward：</span>
-                  <span>{{eth.tolalReward}}</span>
-                </li>
-                <li>
-                  <span>Earned：</span>
-                  <span>{{eth.earned}}</span>
-                </li>
-              </ul>
-              <ul class="content-list" v-else>
-                <li>
-                  <span>Tolal Reward：</span>
-                  <span>{{nsure.tolalReward}}</span>
-                </li>
-                <li>
-                  <span>Earned：</span>
-                  <span>{{nsure.earned}}</span>
-                </li>
-              </ul>
-            </div>
-            <div class="button-wrapper">
-              <button class="button" @click="open">Withdraw</button>
-            </div>
-          </div>
-        </el-card>
-      </div>
-      <div class="home-content-item">
-        <el-card class="box-card">
-          <div class="home-card-item">
-              <div slot="header" class="card-header">
-                <span>Withdraw History</span>
+  <div class="home">
+    <!-- banner -start -->
+    <div class="banner">
+      <div class="banner-content">
+        <div class="banner-content-item banner-content-item-left">
+          <div class="banner-des-box"> 
+            <h1>Open Insurance Platform for the era of Open Finance</h1>
+            <h3>create a market to trade risk</h3>
+            <div class="banner-button-wrapper">
+              <div class="banner-button">
+                <a href="https://form.typeform.com/to/t61JRnFA" target="_blank" rel="">Join waitlist</a>
               </div>
-              <div class="histpry-table home-history">
-                <table>
-                    <tr>
-                        <th>Amount</th>
-                        <th>Tx hash</th>
-                    </tr>
-                    <tr v-for="(item, index) in historyList" :key="index">
-                        <td>{{item.amount}}</td>
-                        <td>{{item.address}}</td>
-                    </tr>
-                </table>
-                <div class="no-data" v-if="historyList.length === 0">No Data</div>
+              <div class="banner-button" @click="goInsure">Test our MVP</div>
             </div>
           </div>
-        </el-card>
-      </div>
-    </div>
-
-    <Dialog width="400px">
-      <div slot="body" class="custom-dialog-body">
-        <template v-if="type === 'ETH'">
-          <div class="img-box">
-            <img src="../assets/images/icon-eth.png" width="38" alt="">
-          </div>
-          <div class="dice-name">ETH</div>
-        </template>
-        <template v-if="type === 'NSURE'">
-          <div class="img-box">
-            <img src="../assets/images/logo@2x.png" width="38" alt="">
-          </div>
-          <div class="dice-name">Nsure</div>
-        </template>
-        <div class="dice-input-box">
-          <div class="input-box">
-            <!-- <div class="max-box">Max</div> -->
-            <input type="number" v-model="number" v-if="type === 'ETH'" placeholder="Amount">
-            <p v-if="type === 'NSURE'" class="withdraw-all">Withdraw all</p>
+        </div>
+        <div class="banner-content-item banner-content-item-right">
+          <div class="banner-img">
+            <img src="../assets/images/banner-bg-2@2x.png" alt="">
           </div>
         </div>
       </div>
-      <div slot="footer">
-        <button class="button close" @click="close">Close</button>
-        <button class="button" v-if="type === 'ETH'" @click="sumbit()">Withdraw</button>
-        <button class="button" v-if="type === 'NSURE'" @click="doMakerWithdraw">Withdraw</button>
+    </div>
+    <!-- banner end -->
+    <!-- content start -->
+    <div class="contnet">
+      <div class="pages-wrapper content-wrapper">
+        <div class="content-item">
+          <el-card class="box-card">
+            <div class="content-item-box">
+              <h3>Liquidity Mining</h3>
+              <p>By providing capital liquidity to back Nsure network Nsure tokens are minted and issued accordingly. Policyholders can also share part of the minted tokens.</p>
+              <div class="img-box">
+                <img src="../assets/images/content-img-01@2x.png" alt="">
+              </div>
+            </div>
+          </el-card>
+        </div>
+        <div class="content-item">
+          <el-card class="box-card">
+            <div class="content-item-box">
+              <h3>Market to Trade Risk</h3>
+              <p>Nsure tokens could be used to stake on the risks they are comfortable, insurance premiums are paid daily, all Nsure tokens are benefit from the system and leverage provided.</p>
+              <div class="img-box">
+                <img src="../assets/images/content-img-02@2x.png" alt="">
+              </div>
+            </div>
+          </el-card>
+        </div>
+        <div class="content-item">
+          <el-card class="box-card">
+             <div class="content-item-box">
+              <h3>Dynamic Pricing & Capital Management</h3>
+              <p>Pricing is determined by real-time supply and demand, capital model is used to ensure claims will be paid and systematic risk is under control.</p>
+              <div class="img-box">
+                <img src="../assets/images/content-img-03@2x.png" alt="">
+              </div>
+            </div>
+          </el-card>
+        </div>
       </div>
-    </Dialog>
+    </div>
+    <!-- content end -->
+
+    <!-- footer start -->
+    <div class="footer">
+      <div class="pages-wrapper footer-wrapper">
+        <div class="left">
+          <div class="logon-wrapper">
+            <img src="@/assets/images/logo@2x.png" width="40" alt="">
+            <span>Nsure.Network</span>
+          </div>
+        </div>
+        <div class="right footer-right">
+          <div class="footer-right-item">
+            <div class="footer-title">SOCIAL</div>
+            <ul class="footer-right-item-list">
+              <li>
+                <img src="../assets/images/twiiter@2x.png" width="16" alt=""> Twitter
+              </li>
+              <li>
+                <img src="../assets/images/discord@2x.png" width="16" alt=""> Discord
+              </li>
+              <li>
+                <img src="../assets/images/telegram@2x.png" width="16" alt=""> Telegram: 
+                <a href="https://t.me/nsurenet" target="_blank" rel="">https://t.me/nsurenet</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-right-item">
+            <div class="footer-title">CONTACT</div>
+            <ul class="footer-right-item-list">
+              <li>
+                contact@Nsure.network
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- footer end -->
   </div>
 </template>
 
 <script>
-import Dialog from '@/components/Dialog'
-import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
   name: 'Home',
-  data() {
-    return {
-      type: 'ETH',
-      number: '',
-      eth: {
-        tolalReward: 0,
-        earned: 0
-      },
-      nsure: {
-        tolalReward: 0,
-        earned: 0
-      },
-      page: 1,
-      historyList: []
-    }
-  },
-  watch: {
-    type(value) {
-      if (value === 'ETH') {
-        this.getTakerBalanceOf()
-      } else {
-        this.getMakerBalanceOf()
-      }
-    }
-  },
-  components: {
-    Dialog
-  },
-  computed: {
-    ...mapState(['balance', 'web3', 'account'])
-  },
-  mounted() {
-    this.getTakerBalanceOf()
-    this.getMakerBalanceOf()
-    this.getRecords()
-  },
   methods: {
-    ...mapMutations(['UPDATE_DIALOG_VISBLE']),
-    ...mapActions(['takerBalanceOf', 'makerBalanceOf', 'takerWithdraw', 'makerWithdraw']),
-    handle(type) {
-      this.type = type
-    },
-    open() {
-      this.UPDATE_DIALOG_VISBLE(true)
-    },
-    close() {
-      this.number = ''
-      this.UPDATE_DIALOG_VISBLE(false)
-    },
-    async getTakerBalanceOf() {
-      try{
-        const tolalReward = await this.takerBalanceOf()
-        const earned = await this.takerBalanceOf(this.account)
-        this.eth.tolalReward = this.web3.utils.fromWei(tolalReward)
-        this.eth.earned = this.web3.utils.fromWei(earned)
-      }catch(e){
-        console.log(e)
-      }
-    },
-    async getMakerBalanceOf() {
-      try{
-        const tolalReward = await this.makerBalanceOf()
-        const earned = await this.makerBalanceOf(this.account)
-        this.nsure.tolalReward = this.web3.utils.fromWei(tolalReward)
-        this.nsure.earned = this.web3.utils.fromWei(earned)
-      }catch(e){
-        console.log(e)
-      }
-    },
-    async sumbit() {
-      try{
-        const num = Number(this.number)
-        if (this.number == '' || num === 0) {
-          this.$message.error('Please enter number frist')
-          return
-        }
-        if (num < 0) {
-          this.$message.error('Must be greater than 0')
-          return
-        }
-        const value = this.web3.utils.toWei(num.toString())
-        await this.takerWithdraw(value)
-      }catch(e){
-        console.log(e)
-      }
-    },
-    async doMakerWithdraw () {
-      try{
-        await this.makerWithdraw() 
-      }catch(e){
-        console.log(e)
-      }
-    },
-    async getRecords() {
-      try{
-          const params = {
-              address: this.account, // acount
-              tran_type: 2,
-              record_type: 0,
-              page: this.page
-          }
-          const res = await this.$http.getRecords(params)
-          this.historyList = res.data
-          this.total = res.total
-          console.log(res)
-      }catch(e){
-          throw Error(e)
-      }
+    goInsure() {
+      this.$router.push('/insure')
     }
   }
 }
@@ -211,99 +116,182 @@ export default {
 
 <style lang="less" scoped>
 .home {
-  padding: 48px 0;
-
-  .home-content {
+  .banner {
+    color: rgba(255, 255, 255, 0.6);
+    padding: 120px 0;
+    background-color: #1B2532;
     display: flex;
     justify-content: center;
+    text-align: center;
 
-    &-item {
-      width: 50%;
-      margin: 0 10px;
+    &-content {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
 
-      .home-button {
-        display: flex;
-        justify-content: center;
+      &-item-left {
+        width: 60%;
 
-        span {
-          display: block;
-          width: 260px;
-          height: 50px;
-          line-height: 50px;
-          text-align: center;
-          border-radius: 25px;
-          font-size: 16px;
-          margin: 0 12px;
-          cursor: pointer;
-          font-weight: bold;
-          box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.09),6px 6px 26px 0px rgba(255,255,255,0.5);
+        .banner-des-box {
+          text-align: left;
+          padding: 0 100px;
 
-          &.active {
-            box-shadow: inset 0px 2px 15px 0px rgba(0,0,0,0.09),6px 6px 26px 0px rgba(255,255,255,0.5);
+          h1 {
+            color: #fff;
+            font-size: 46px;
+            line-height: 1.2;
           }
-        }
-      }
 
-      .home-card-content {
-        padding: 50px 0;
-        .content-list {
-          padding: 0 50px;
-          li {
+          h3 {
+            color: #fff;
+            font-size: 32px;
+            line-height: 1.2;
+            opacity: 0.4;
+            margin-top: 30px;
+            font-weight: normal;
+          }
+
+          .banner-button-wrapper {
+            margin-top: 120px;
             display: flex;
-            font-size: 20px;
-            margin-bottom: 24px;
-            justify-content: space-between;
 
-            span {
-              opacity: 0.6;
+            .banner-button {
+              color: #fff;
+              cursor: pointer;
+              width: 190px;
+              height: 52px;
+              font-size: 18px;
+              line-height: 50px;
+              text-align: center;
+              border-radius: 5px;
+              border: 1px solid #fff;
+              margin-right: 24px;
 
-              &:last-child {
-                opacity: 1;
+              a {
+                color: #fff;
+                text-decoration: none;
+              }
+
+              &:hover {
+                color: #1DBF92;
+                border: 1px solid #1DBF92;
+
+                a {
+                  color: #1DBF92;
+                }
               }
             }
           }
         }
       }
+      &-item-right {
+        width: 40%;
 
-      .button-wrapper {
-        display: flex;
-        padding-bottom: 12px;
-        justify-content: center;
-        button {
-          width: 400px;
-          border-radius: 22px;
+        .banner-img {
+          img {
+            width: 100%;
+            max-width: 586px;
+          }
         }
       }
     }
+  }
 
-    .box-card {
-      border-radius: 30px;
-      margin: 0;
-      height: 320px;
-      padding-bottom: 24px;
-    }
+  .contnet {
+    background-color: #F5F6F7;
+    padding: 100px 0;
+  }
 
-    .home-card-item {
-      padding-top: 24px;
+  .content-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .content-item {
+      width: 400px;
+
+      .content-item-box {
+        height: 430px;
+        padding: 30px 10px 10px;
+        position: relative;
+
+        .img-box {
+          text-align: center;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          z-index: 0;
+  
+          img {
+            width: 240px;
+          }
+        }
+
+        h3 {
+          color: #1B2532;
+          font-size: 20px;
+          line-height: 1.5;
+          margin-bottom: 20px;
+        }
+  
+        p {
+          color: #1B2532;
+          opacity: 0.4;
+          font-size: 16px;
+          line-height: 1.5;
+        }
+      }
+
     }
   }
-}
 
-.withdraw-all {
-  text-align: left;
-  line-height: 40px;
-  opacity: 0.6;
-}
+  .footer {
+    color: #fff;
+    background-color: #1B2532;
+    .footer-wrapper {
+      display: flex;
+      justify-content: space-between;
+      padding: 80px 0 100px;
 
-.home-history {
-  margin-top: 10px;
-  max-height: 246px;
-  overflow-y: auto;
-  th,
-  td {
-    text-align: left;
-    &:last-child {
-      text-align: right;
+      .logon-wrapper {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        img {
+            margin-right: 20px;
+        }
+      }
+
+      .footer-right {
+        display: flex;
+
+        &-item {
+          margin-left: 40px;
+
+          .footer-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+          }
+
+          &-list {
+            font-size: 14px;
+            li {
+              margin-bottom: 15px;
+
+              img {
+                float: left;
+                margin: 2px 10px 0 0;
+              }
+
+              a {
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -7,13 +7,12 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    // component: Home
-    redirect: { name: 'Insure' }
+    component: Home
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: Home
+    path: '/withdraw',
+    name: 'Withdraw',
+    component: () => import(/* webpackChunkName: "Withdraw" */ '../views/Withdraw.vue')
   },
   {
     path: '/stake-pool',

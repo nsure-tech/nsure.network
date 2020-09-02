@@ -1,17 +1,30 @@
 <template>
-    <div class="header">
+    <div class="header" :class="{ home: $route.path === '/'}">
         <div class="pages-wrapper header-wrapper">
             <div class="logon-wrapper" @click="home">
                 <img src="@/assets/images/logo@2x.png" width="40" alt="">
                 <span>Nsure.Network</span>
             </div>
             <div class="right-wrapper">
-                <ul class="nav-list">
-                    <li>
-                        <router-link to="/home">Home</router-link>
-                    </li>
+                <div v-if="$route.path === '/'" class="right-list">
+                    <div class="right-list-item">
+                        Whitepaper
+                        <!-- <a href="https://github.com/nsure-tech/" target="_blank" rel="">Whitepaper</a> -->
+                    </div>
+                    <div class="right-list-item">
+                        FAQ
+                        <!-- <a href="https://github.com/nsure-tech/" target="_blank" rel="">FAQ</a> -->
+                    </div>
+                    <div class="right-list-item last">
+                        <div class="last-item" @click="goInsure">Text Network </div>
+                    </div>
+                </div>
+                <ul class="nav-list" v-else>
                     <li>
                         <router-link to="/insure">Insure</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/withdraw">Withdraw</router-link>
                     </li>
                     <li>
                         <router-link to="/liquidity-mining">Liquidity Mining</router-link>
@@ -22,21 +35,7 @@
                     <li>
                         <a href="https://github.com/nsure-tech/" target="_blank" rel="">Github</a>
                     </li>
-                    <!-- <li>Purchase Cover</li>
-                    <li>Liquidity Mining</li>
-                    <li>Reward Dashboard</li>
-                    <li>Purchase Record </li>
-                    <li>Staking Dashboard</li>
-                    <li>Github</li> -->
                 </ul>
-                <!-- <el-dropdown>
-                    <span class="el-dropdown-link menu-item">
-                        {{$route.name}}
-                    </span>
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item v-for="(list, index) in menuList" :key="index" @click.native="handle(list)">{{list.name}}</el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown> -->
             </div>
         </div>
     </div>
@@ -70,6 +69,9 @@ export default {
         },
         home() {
             this.$router.push('/')
+        },
+        goInsure() {
+            this.$router.push('/insure')
         }
     }
 }
@@ -79,6 +81,19 @@ export default {
 .header {
     height: 80px;
     background-color: #fff;
+
+    &.home {
+        background-color: #1B2532;
+        padding: 0 20px;
+
+        span {
+            color: #fff;
+        }
+
+        .pages-wrapper {
+            width: 100%;
+        }
+    }
 
     .header-wrapper {
         height: 80px;
@@ -94,6 +109,34 @@ export default {
 
         img {
             margin-right: 20px;
+        }
+    }
+
+    .right-list {
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &-item {
+            margin-left: 40px;
+            font-size: 16px;
+
+            a {
+                color: #fff;
+                cursor: pointer;
+                text-decoration: none;
+            }
+
+            .last-item {
+                cursor: pointer;
+                width: 148px;
+                height: 48px;
+                line-height: 48px;
+                text-align: center;
+                background: url('../assets/images/button@2x.png') center center no-repeat;
+                background-size: contain;
+            }
         }
     }
 
@@ -114,9 +157,5 @@ export default {
             }
         }
     }
-}
-.menu-item {
-    color: #000;
-    cursor: pointer;
 }
 </style>

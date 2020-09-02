@@ -374,10 +374,6 @@ export default {
 
         .box-card {
             border-radius: 30px;
-
-            .histpry-table {
-
-            }
         }
     }
 }
