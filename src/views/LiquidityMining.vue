@@ -27,11 +27,11 @@
                                 </li>
                                 <li>
                                     <span>My balance: </span>
-                                    <span>0</span>
+                                    <span>{{eth.myBalance}}</span>
                                 </li>
                                 <li>
                                     <span>My locked: </span>
-                                    <span>0</span>
+                                    <span>{{eth.mylocked}}</span>
                                 </li>
                             </ul>
 
@@ -169,7 +169,9 @@ export default {
             eth: {
                 avail: 0,
                 locked: 0,
-                max: 0
+                max: 0,
+                myBalance: 0,
+                mylocked: 0,
             },
             historyList: []
         }
@@ -243,7 +245,10 @@ export default {
                 this.eth.locked = this.web3.utils.fromWei(res.locked)
 
                 const InsuranceProviderPoolInfo = await this.InsuranceProviderPoolInfo()
+                console.log({InsuranceProviderPoolInfo})
                 this.eth.max = this.web3.utils.fromWei(InsuranceProviderPoolInfo.avail)
+                this.eth.myBalance = this.web3.utils.fromWei(InsuranceProviderPoolInfo.avail)
+                this.eth.max = this.web3.utils.fromWei(InsuranceProviderPoolInfo.locked)
             } catch (error) {
                 throw Error(error)
             }

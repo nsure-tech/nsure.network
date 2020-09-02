@@ -31,7 +31,7 @@
             </div>
           </li>
         </ul>
-        <div class="button-wrapper">
+        <!-- <div class="button-wrapper">
           <button class="button" @click="open('Stake')">Stake</button>
           <button class="button" @click="getDividends">Dividends</button>
         </div>
@@ -39,7 +39,7 @@
           <button class="button" @click="open('Withdraw')">Withdraw</button>
           <button class="button" v-if="withdrawal && isTimes" @click="doWithdraw">Do Withdraw</button>
           <button class="button disabled" v-else>Do Withdraw</button>
-        </div>
+        </div> -->
       </el-card>
 
       <el-card class="box-card right-card">
@@ -72,6 +72,22 @@
             </div>
           </li>
         </ul>
+      </el-card>
+    </div>
+
+    <div class="Withdraw-wrapper">
+      <el-card class="box-card">
+        <div class="Withdraw-wrapper-content">
+          <div class="button-wrapper">
+            <button class="button" @click="open('Stake')">Stake</button>
+            <button class="button" @click="getDividends">Dividends</button>
+          </div>
+          <div class="button-wrapper">
+            <button class="button" @click="open('Withdraw')">Withdraw</button>
+            <button class="button" v-if="withdrawal && isTimes" @click="doWithdraw">Do Withdraw</button>
+            <button class="button disabled" v-else>Do Withdraw</button>
+          </div>
+        </div>
       </el-card>
     </div>
     <Dialog width="400px">
@@ -133,7 +149,6 @@ export default {
     }
   },
   mounted() {
-    this.getDividends()
     this.getPool()
     this.getPoolBalancesFn()
     this.getInvestorInfoFn()
@@ -142,7 +157,7 @@ export default {
   },
   methods: {
     ...mapMutations(['UPDATE_DIALOG_VISBLE']),
-    ...mapActions(['getDividends', 'setApprove', 'pool', 'getPoolBalances', 'getInvestorInfo', 'shareOf', 'submitWithdrawProposal', 'doWithdraw', 'getDividends']),
+    ...mapActions(['getDividends', 'setApprove', 'pool', 'getPoolBalances', 'getInvestorInfo', 'shareOf', 'submitWithdrawProposal', 'doWithdraw']),
     open(type) {
       let max = 0
       this.number = ''
@@ -274,6 +289,25 @@ export default {
             
           }
         }
+      }
+    }
+  }
+
+  .Withdraw-wrapper {
+    margin-top: 40px;
+    .box-card {
+      margin: 0;
+
+      .Withdraw-wrapper-content {
+        padding: 40px 0 20px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .button-wrapper {
+        width: 50%;
+        display: flex;
+        justify-content: center;
       }
     }
   }

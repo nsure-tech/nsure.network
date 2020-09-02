@@ -16,6 +16,21 @@
                                 <img :src="item.logo" alt="">
                             </div>
                         </li>
+                        <li>
+                            <div class="img-box disabled">
+                                <img src="../assets/images/logo1@2x.png" alt="">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="img-box disabled">
+                                <img src="../assets/images/logo2@2x.png" alt="">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="img-box disabled">
+                                <img src="../assets/images/logo4@2x.png" alt="">
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </el-card>
@@ -405,7 +420,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         li {
-            width: 100px;
+            width: 96px;
             margin-right: 10px;
 
             .img-box {
@@ -423,6 +438,18 @@ export default {
                 &:hover,
                 &.active {
                     background-color: #F5F6F7;
+                }
+
+                &.disabled {
+                    cursor: default;
+                    filter: grayscale(100%);
+                    filter: gray;
+                    opacity: 0.5;
+
+                    &:hover,
+                    &.active {
+                        background-color: #fff;
+                    }
                 }
             }
         }

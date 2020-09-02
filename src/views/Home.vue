@@ -94,7 +94,6 @@
 <script>
 import Dialog from '@/components/Dialog'
 import { mapState, mapMutations, mapActions } from 'vuex'
-import { nsrToken } from '@/config'
 export default {
   name: 'Home',
   data() {
@@ -149,7 +148,7 @@ export default {
     async getTakerBalanceOf() {
       try{
         const tolalReward = await this.takerBalanceOf()
-        const earned = await this.takerBalanceOf(nsrToken)
+        const earned = await this.takerBalanceOf(this.account)
         this.eth.tolalReward = this.web3.utils.fromWei(tolalReward)
         this.eth.earned = this.web3.utils.fromWei(earned)
       }catch(e){
@@ -159,7 +158,7 @@ export default {
     async getMakerBalanceOf() {
       try{
         const tolalReward = await this.makerBalanceOf()
-        const earned = await this.makerBalanceOf(nsrToken)
+        const earned = await this.makerBalanceOf(this.account)
         this.nsure.tolalReward = this.web3.utils.fromWei(tolalReward)
         this.nsure.earned = this.web3.utils.fromWei(earned)
       }catch(e){
