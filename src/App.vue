@@ -11,49 +11,49 @@
 
 <script>
 import Header from '@/components/Header'
-import { mapActions } from "vuex";
-import Web3 from 'web3'
+// import { mapActions } from "vuex";
+// import Web3 from 'web3'
 export default {
   components: {
     Header
   },
-  created() {
-    window.addEventListener('load', async () => {
-      // Modern dapp browsers...
-      if (window.ethereum) {
-          // eslint-disable-next-line no-undef
-          window.web3 = new Web3(ethereum);
-          try {
-              // Request account access if needed
-              // eslint-disable-next-line no-undef
-              await ethereum.enable();
-              // Acccounts now exposed
-              // eslint-disable-next-line no-undef
-              web3.eth.sendTransaction({/* ... */});
-          } catch (error) {
-              // User denied account access...
-          }
-      }
-      // Legacy dapp browsers...
-      else if (window.web3) {
-          // eslint-disable-next-line no-undef
-          window.web3 = new Web3(web3.currentProvider);
-          // Acccounts always exposed
-          // eslint-disable-next-line no-undef
-          web3.eth.sendTransaction({/* ... */});
-      }
-      // Non-dapp browsers...
-      else {
-          console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
-      }
-    });
-  },
-  mounted() {
-    this.getAccounts()
-  },
-  methods: {
-    ...mapActions(['getAccounts'])
-  }
+  // created() {
+  //   window.addEventListener('load', async () => {
+  //     // Modern dapp browsers...
+  //     if (window.ethereum) {
+  //         // eslint-disable-next-line no-undef
+  //         window.web3 = new Web3(ethereum);
+  //         try {
+  //             // Request account access if needed
+  //             // eslint-disable-next-line no-undef
+  //             await ethereum.enable();
+  //             // Acccounts now exposed
+  //             // eslint-disable-next-line no-undef
+  //             web3.eth.sendTransaction({/* ... */});
+  //         } catch (error) {
+  //             // User denied account access...
+  //         }
+  //     }
+  //     // Legacy dapp browsers...
+  //     else if (window.web3) {
+  //         // eslint-disable-next-line no-undef
+  //         window.web3 = new Web3(web3.currentProvider);
+  //         // Acccounts always exposed
+  //         // eslint-disable-next-line no-undef
+  //         web3.eth.sendTransaction({/* ... */});
+  //     }
+  //     // Non-dapp browsers...
+  //     else {
+  //         console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+  //     }
+  //   });
+  // },
+  // mounted() {
+  //   this.getAccounts()
+  // },
+  // methods: {
+  //   ...mapActions(['getAccounts'])
+  // }
 }
 </script>
 

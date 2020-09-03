@@ -11,7 +11,9 @@
               <div class="banner-button">
                 <a href="https://form.typeform.com/to/t61JRnFA" target="_blank" rel="">Join waitlist</a>
               </div>
-              <div class="banner-button" @click="goInsure">Test our MVP</div>
+              <div class="banner-button">
+                <a href="https://buy.nsure.network/#/">Test our MVP</a>
+              </div>
             </div>
           </div>
         </div>
@@ -77,10 +79,12 @@
             <div class="footer-title">SOCIAL</div>
             <ul class="footer-right-item-list">
               <li>
-                <img src="../assets/images/twiiter@2x.png" width="16" alt=""> Twitter
+                <img src="../assets/images/twiiter@2x.png" width="16" alt=""> Twitter: 
+                <a href="https://twitter.com/Nsure_network" target="_blank" rel="">https://twitter.com/Nsure_network</a>
               </li>
               <li>
-                <img src="../assets/images/discord@2x.png" width="16" alt=""> Discord
+                <img src="../assets/images/discord@2x.png" width="16" alt=""> Discord: 
+                <a href="https://discord.com/invite/nSvAapa" target="_blank" rel="">https://discord.com/invite/nSvAapa</a>
               </li>
               <li>
                 <img src="../assets/images/telegram@2x.png" width="16" alt=""> Telegram: 
@@ -108,7 +112,7 @@ export default {
   name: 'Home',
   methods: {
     goInsure() {
-      this.$router.push('/insure')
+      // this.$router.push('/insure')
     }
   }
 }

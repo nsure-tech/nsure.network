@@ -1,41 +1,23 @@
 <template>
-    <div class="header" :class="{ home: $route.path === '/'}">
+    <div class="header home">
         <div class="pages-wrapper header-wrapper">
             <div class="logon-wrapper" @click="home">
                 <img src="@/assets/images/logo@2x.png" width="40" alt="">
                 <span>Nsure.Network</span>
             </div>
             <div class="right-wrapper">
-                <div v-if="$route.path === '/'" class="right-list">
+                <div class="right-list">
                     <div class="right-list-item">
                         Whitepaper
                         <!-- <a href="https://github.com/nsure-tech/" target="_blank" rel="">Whitepaper</a> -->
                     </div>
                     <div class="right-list-item">
-                        FAQ
-                        <!-- <a href="https://github.com/nsure-tech/" target="_blank" rel="">FAQ</a> -->
+                        <router-link to="/faq">FAQ</router-link>
                     </div>
                     <div class="right-list-item last">
-                        <div class="last-item" @click="goInsure">Text Network </div>
+                        <a href="https://buy.nsure.network/#/" class="last-item" rel="">Text Network</a>
                     </div>
                 </div>
-                <ul class="nav-list" v-else>
-                    <li>
-                        <router-link to="/insure">Insure</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/withdraw">Withdraw</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/liquidity-mining">Liquidity Mining</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/stake-pool">Staking Dashboard</router-link>
-                    </li>
-                    <li>
-                        <a href="https://github.com/nsure-tech/" target="_blank" rel="">Github</a>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
@@ -129,6 +111,7 @@ export default {
             }
 
             .last-item {
+                display: block;
                 cursor: pointer;
                 width: 148px;
                 height: 48px;
