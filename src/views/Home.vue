@@ -5,14 +5,14 @@
       <div class="banner-content">
         <div class="banner-content-item banner-content-item-left">
           <div class="banner-des-box"> 
-            <h1>Open Insurance Platform for the era of Open Finance</h1>
-            <h3>create a market to trade risk</h3>
+            <h1>Open Insurance Platform for Open Finance</h1>
+            <h3>Create an insurance market to trade risk</h3>
             <div class="banner-button-wrapper">
               <div class="banner-button">
-                <a href="https://form.typeform.com/to/t61JRnFA" target="_blank" rel="">Join waitlist</a>
+                <a href="https://form.typeform.com/to/t61JRnFA" target="_blank" rel="">Join Waitlist</a>
               </div>
               <div class="banner-button">
-                <a href="https://buy.nsure.network/#/">Test our MVP</a>
+                <a href="https://buy.nsure.network/#/">MVP on Rinkeby</a>
               </div>
             </div>
           </div>
@@ -31,7 +31,7 @@
         <div class="content-item">
           <el-card class="box-card">
             <div class="content-item-box">
-              <h3>Liquidity Mining</h3>
+              <h3>Capital Mining</h3>
               <p>By providing capital liquidity to back Nsure network Nsure tokens are minted and issued accordingly. Policyholders can also share part of the minted tokens.</p>
               <div class="img-box">
                 <img src="../assets/images/content-img-01@2x.png" alt="">
@@ -42,8 +42,8 @@
         <div class="content-item">
           <el-card class="box-card">
             <div class="content-item-box">
-              <h3>Market to Trade Risk</h3>
-              <p>Nsure tokens could be used to stake on the risks they are comfortable, insurance premiums are paid daily, all Nsure tokens are benefit from the system and leverage provided.</p>
+              <h3>Open Market to Trade Risk</h3>
+              <p>Nsure.network is a permissionless platform. Nsure tokens could be used to stake on the risks they are comfortable, insurance premiums are paid daily, all Nsure tokens are benefit from the system and leverage provided</p>
               <div class="img-box">
                 <img src="../assets/images/content-img-02@2x.png" alt="">
               </div>
@@ -53,7 +53,7 @@
         <div class="content-item">
           <el-card class="box-card">
              <div class="content-item-box">
-              <h3>Dynamic Pricing & Capital Management</h3>
+              <h3>Dynamic Pricing and Capital Management</h3>
               <p>Pricing is determined by real-time supply and demand, capital model is used to ensure claims will be paid and systematic risk is under control.</p>
               <div class="img-box">
                 <img src="../assets/images/content-img-03@2x.png" alt="">
@@ -79,16 +79,16 @@
             <div class="footer-title">SOCIAL</div>
             <ul class="footer-right-item-list">
               <li>
-                <img src="../assets/images/twiiter@2x.png" width="16" alt=""> Twitter: 
-                <a href="https://twitter.com/Nsure_network" target="_blank" rel="">https://twitter.com/Nsure_network</a>
+                <img src="../assets/images/twiiter@2x.png" width="16" alt=""> 
+                <a href="https://twitter.com/Nsure_network" target="_blank" rel="">Twitter</a>
               </li>
               <li>
-                <img src="../assets/images/discord@2x.png" width="16" alt=""> Discord: 
-                <a href="https://discord.com/invite/nSvAapa" target="_blank" rel="">https://discord.com/invite/nSvAapa</a>
+                <img src="../assets/images/discord@2x.png" width="16" alt=""> 
+                <a href="https://discord.com/invite/nSvAapa" target="_blank" rel="">Discord</a>
               </li>
               <li>
-                <img src="../assets/images/telegram@2x.png" width="16" alt=""> Telegram: 
-                <a href="https://t.me/nsurenet" target="_blank" rel="">https://t.me/nsurenet</a>
+                <img src="../assets/images/telegram@2x.png" width="16" alt="">  
+                <a href="https://t.me/nsurenet" target="_blank" rel="">Telegram</a>
               </li>
             </ul>
           </div>
@@ -109,12 +109,7 @@
 
 <script>
 export default {
-  name: 'Home',
-  methods: {
-    goInsure() {
-      // this.$router.push('/insure')
-    }
-  }
+  name: 'Home'
 }
 </script>
 

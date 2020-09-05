@@ -14,9 +14,9 @@
                     <div class="right-list-item">
                         <router-link to="/faq">FAQ</router-link>
                     </div>
-                    <div class="right-list-item last">
-                        <a href="https://buy.nsure.network/#/" class="last-item" rel="">Text Network</a>
-                    </div>
+                    <!-- <div class="right-list-item last">
+                        <a href="https://buy.nsure.network/#/" class="last-item" rel="">Testnet</a>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -62,6 +62,7 @@ export default {
 <style lang="less" scoped>
 .header {
     height: 80px;
+    font-weight: bold;
     background-color: #fff;
 
     &.home {

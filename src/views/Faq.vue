@@ -2,11 +2,11 @@
     <div class="faq">
         <div class="faq-wrapper">
             <div class="faq-banner">
-                <div class="pages-wrapper">
+                <div class="pages-wrapper faq-pages-wrapper">
                     <div class="title">Common Questions Around Interacting With Nsure.</div>
                 </div>
             </div>
-            <div class="faq-content pages-wrapper">
+            <div class="faq-content pages-wrapper faq-pages-wrapper">
                 <ul>
                     <li v-for="(item, index) in list" :key="index">
                         <div class="faq-item">
@@ -74,14 +74,18 @@ export default {
 
         .title {
             color: #fff;
-            font-size: 40px;
+            font-size: 36px;
             line-height: 1.5;
-            padding: 180px 0 80px;
+            padding: 100px 0 40px;
         }
     }
 
+    .faq-pages-wrapper {
+        width: 1000px;
+    }
+
     .faq-content {
-        padding: 80px 0;
+        padding: 40px 0;
         ul {
             > li {
                 background-color: #fff;
@@ -93,14 +97,14 @@ export default {
 
                     .title {
                         color: #1B2532;
-                        font-size: 30px;
+                        font-size: 24px;
                         line-height: 1.2;
                         margin-bottom: 30px;
                     }
 
                     .descrption {
                         color: #1B2532;
-                        font-size: 20px;
+                        font-size: 16px;
                         line-height: 1.5;
                         opacity: 0.4;
                     }
