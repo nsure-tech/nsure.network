@@ -32,7 +32,7 @@
           <el-card class="box-card">
             <div class="content-item-box">
               <h3>Capital Mining</h3>
-              <p>By providing capital liquidity to back Nsure network Nsure tokens are minted and issued accordingly. Policyholders can also share part of the minted tokens.</p>
+              <p>Provide capital to back insurance risks in the capital pool, or purchase insurance covers to obtain NSURE tokens. NSURE are minted and automatically awarded on every block.</p>
               <div class="img-box">
                 <img src="../assets/images/content-img-01@2x.png" alt="">
               </div>
@@ -43,7 +43,7 @@
           <el-card class="box-card">
             <div class="content-item-box">
               <h3>Open Market to Trade Risk</h3>
-              <p>Nsure.network is a permissionless platform. Nsure tokens could be used to stake on the risks they are comfortable, insurance premiums are paid daily, all Nsure tokens are benefit from the system and leverage provided</p>
+              <p>Nsure.Network is a permissionless platform for whoever wants to purchase a cover. Capital providers can utilize NSURE to stake on specific insurance risks to obtain daily insurance premiums. Leverage staking is available for non-correlated insurance products.</p>
               <div class="img-box">
                 <img src="../assets/images/content-img-02@2x.png" alt="">
               </div>
@@ -54,7 +54,7 @@
           <el-card class="box-card">
              <div class="content-item-box">
               <h3>Dynamic Pricing and Capital Management</h3>
-              <p>Pricing is determined by real-time supply and demand, capital model is used to ensure claims will be paid and systematic risk is under control.</p>
+              <p>Pricing is determined by real-time supply of capital and demand of insurance coverage for the products. The capital model ensures that valid claims will always be paid and that systematic risk is under control.</p>
               <div class="img-box">
                 <img src="../assets/images/content-img-03@2x.png" alt="">
               </div>
@@ -89,6 +89,10 @@
               <li>
                 <img src="../assets/images/telegram@2x.png" width="16" alt="">  
                 <a href="https://t.me/nsurenet" target="_blank" rel="">Telegram</a>
+              </li>
+              <li>
+                <img src="../assets/images/medium@2x.png" width="16" alt="">  
+                <a href="https://medium.com/@nsure_network" target="_blank" rel="">Medium</a>
               </li>
             </ul>
           </div>
@@ -236,7 +240,7 @@ export default {
         p {
           color: #1B2532;
           opacity: 0.4;
-          font-size: 16px;
+          font-size: 14px;
           line-height: 1.5;
         }
       }
