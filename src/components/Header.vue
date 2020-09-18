@@ -8,7 +8,7 @@
             <div class="right-wrapper">
                 <div class="right-list">
                     <div class="right-list-item">
-                        <a href="/Nsure_WP_0.4.pdf" target="_blank" rel="">Whitepaper</a>
+                        <a href="/Nsure_WP_0.7.pdf" target="_blank" rel="">Whitepaper</a>
                     </div>
                     <div class="right-list-item">
                         <router-link to="/faq">FAQ</router-link>

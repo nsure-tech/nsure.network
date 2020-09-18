@@ -65,6 +65,22 @@
     </div>
     <!-- content end -->
 
+    <div class="we-do-wrapper">
+      <div class="pages-wrapper we-do-content">
+        <h1>Nsure.Network Roadmap</h1>
+        <div class="we-do-list-wrapper">
+          <ul class="we-do-list">
+            <li v-for="(roadmapItem, index) in roadmap" :key="index">
+              <div class="title">{{roadmapItem.time}}</div>
+              <ul class="we-do-item-list">
+                <li v-for="item in roadmapItem.list" :key="item">{{item}}</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
     <!-- footer start -->
     <div class="footer">
       <div class="pages-wrapper footer-wrapper">
@@ -113,7 +129,41 @@
 
 <script>
 export default {
-  name: 'Home'
+  name: 'Home',
+  data() {
+    return {
+      roadmap: [
+        {
+          time: '2020Q1',
+          list: ['Whitepaper V0.1 release']
+        },
+        {
+          time: '2020Q3',
+          list: ['MVP', 'Liquidity Bootstrapping']
+        },
+        {
+          time: '2020Q4',
+          list: ['Alpha release: Capital Mining; Cover purchasing; Leveraged Staking; Claim payment']
+        },
+        {
+          time: '2021Q1',
+          list: ['Mainnet V1.0 release']
+        },
+        {
+          time: '2021Q2',
+          list: ['Nsure DAO support; Community governance']
+        },
+        {
+          time: '2021Q3',
+          list: ['Boostrap on multichain ecosystem; e.g. Polkadot']
+        },
+        {
+          time: '2021Q4',
+          list: ['Developing strategies to deliver greater returns to Nsure holders']
+        },
+      ]
+    }
+  }
 }
 </script>
 
@@ -245,6 +295,49 @@ export default {
         }
       }
 
+    }
+  }
+
+  .we-do-wrapper {
+    color: #fff;
+    padding: 80px 0;
+    background-color: #00111b;
+
+    .we-do-content {
+      h1, h2 {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+      h2 {
+        color: #13c7fd;
+        margin: 30px 0 40px;
+      }
+
+      .we-do-list-wrapper {
+        display: flex;
+        justify-content: center;
+      }
+      .we-do-list {
+        width: 40%;
+
+        .title {
+          color: #13c7fd;
+          padding-left: 42px;
+        }
+
+        .we-do-item-list {
+          padding: 8px 0 28px 60px;
+          margin: 10px 0 0 8px;
+          border-left: 2px solid #13c7fd;
+
+          >li {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            list-style-type: disc;
+          }
+        }
+      }
     }
   }
 
