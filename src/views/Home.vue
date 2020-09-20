@@ -81,6 +81,30 @@
       </div>
     </div>
 
+    <!-- team start -->
+    <div class="team-wrapper">
+      <div class="title">Team</div>
+      <div class="pages-wrapper team-content">
+        <ul class="team-content-list">
+          <li v-for="(item, index) in team" :key="index">
+            <div class="list-item">
+              <el-card class="box-card">
+                <div class="content-item-box">
+                  <h3>{{item.name}}</h3>
+                  <h4>{{item.job}}</h4>
+                  <div class="banner-des-box">
+                    <p v-for="des in item.introduction" :key="des">{{des}}</p>
+                  </div>
+                  <!-- <p>{{item.}}</p>                   -->
+                </div>
+              </el-card>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- team end -->
+
     <!-- footer start -->
     <div class="footer">
       <div class="pages-wrapper footer-wrapper">
@@ -161,6 +185,53 @@ export default {
           time: '2021Q4',
           list: ['Developing strategies to deliver greater returns to Nsure holders']
         },
+      ],
+      team: [
+        {
+          name: 'Jeff Ren',
+          job: 'Management & Research',
+          introduction: [
+            'M.Sc in Management.',
+            'M.Sc in Coastal Engineering.',
+            'Previously with Chainfunder Capital as Investment Director & Researcher.',
+            'Research about blockchain protocols and ecosystems since 2017. Has been developing for Hurricane surge model for NOAA(US National Oceanic and Atmospheric Administration).'
+          ]
+        },
+        {
+          name: 'Alex Peng',
+          job: 'Insurance Model Design & Actuarial Analysis',
+          introduction: [
+            'Master’s Degree in Financial Engineering.',
+            '10 years insurance professional in AON with extensive experience in Actuarial Analysis, Insurance Linked Securities structuring and Reinsurance broker. ',
+            'Expert in Financial Modeling and Quantit-ative Analytics.'
+          ]
+        },
+        {
+          name: 'Leafan Chan',
+          job: 'Lead Developer',
+          introduction: [
+            'Project Management Professional (PMP) certificate',
+            'Expert in Project Management, smart contracts and public blockchain development.',
+            '10 years’ C++/Golang relevant working experience, and more than 3 years blockchain experiences, formerly lead Sangfor’s cyber security team of 40+ devs.'
+          ]
+        },
+        {
+          name: 'Vincent Bauwens',
+          job: 'Marketing',
+          introduction: [
+            'Msc. in Finance and Business Engineering.',
+            'Co-Founder of several companies and ecommerce brands.Currently managing a marketing agency. 5+ years of experience in marketing & business development and early stage investments in the blockchain industry.'
+          ]
+        },
+        {
+          name: 'Gherardo Lattanzi',
+          job: 'Operation',
+          introduction: [
+            'Crypto Data Analytics | Ecosystem Developer @ OceanProtocol.',
+            'Data Analtycs and ML certificate from Ubiqun Code Acadamy.',
+            'Degree in International Business Trading and Development.'
+          ]
+        }
       ]
     }
   }
@@ -335,6 +406,57 @@ export default {
             line-height: 1.5;
             margin-bottom: 15px;
             list-style-type: disc;
+          }
+        }
+      }
+    }
+  }
+
+  .team-wrapper {
+    padding: 50px 0;
+
+    .title {
+      font-size: 34px;
+      text-align: center;
+      padding-bottom: 40px;
+      font-weight: bold;
+
+    }
+    .team-content-list {
+      display: flex;
+      flex-wrap: wrap;
+
+      li {
+        width: 33.33%;
+        .list-item {
+          padding: 0 10px;
+
+          .content-item-box {
+            min-height: 300px;
+            padding: 30px 10px 10px;
+
+            h3 {
+              color: #1B2532;
+              font-size: 20px;
+              line-height: 1.5;
+              margin-bottom: 10px;
+            }
+
+            h4 {
+              color: #1B2532;
+              opacity: 0.6;
+              font-size: 16px;
+              line-height: 1.5;
+              margin-bottom: 20px;
+            }
+
+            p {
+              color: #1B2532;
+              opacity: 0.5;
+              font-size: 14px;
+              line-height: 1.5;
+              margin-bottom: 5px;
+            }
           }
         }
       }
