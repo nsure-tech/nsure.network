@@ -14,7 +14,6 @@ const DOMAIN_CONFIG = {
 };
 
 let domain = DOMAIN_CONFIG.dev;
-console.log('VUE_APP_CURRENTMODE', process.env.VUE_APP_CURRENTMODE)
 
 if (process.env.VUE_APP_CURRENTMODE === 'test') {
     domain = DOMAIN_CONFIG.test;
