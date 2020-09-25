@@ -216,6 +216,14 @@ export default {
           ]
         },
         {
+          name: 'Alvaro Fernandez',
+          job: 'Strategy & Growth',
+          introduction: [
+            'Majored in Economics & Finance. ',
+            'Developed his carreer in Venture Capital space. Previously Vice President and Managing Director for Europe at JRR Group. prior to that Investment & Incubation Manager at ChainFunder. Provided strategic consulting, including DBS Singapore & Italian Undersecretary of State for the Ministry of Economic Development.'
+          ]
+        },
+        {
           name: 'Vincent Bauwens',
           job: 'Marketing',
           introduction: [
