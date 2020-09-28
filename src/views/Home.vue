@@ -232,12 +232,11 @@ export default {
           ]
         },
         {
-          name: 'Gherardo Lattanzi',
-          job: 'Operation',
+          name: 'Gary Lattanzi',
+          job: 'Partnerships & Operations',
           introduction: [
-            'Crypto Data Analytics | Ecosystem Developer @ OceanProtocol.',
-            'Data Analtycs and ML certificate from Ubiqun Code Acadamy.',
-            'Degree in International Business Trading and Development.'
+            'Majored in International Business Trading and Development.',
+            'Developed his carreer in Venture Capital space as analyst for different token funds. Currently in the AI*blockchain intersection doing Crypto Data Analytics. Provided strategic consulting, including HTF startups, web3  & Italian Undersecretary of State for the Ministry of Economic Development.'
           ]
         }
       ]
