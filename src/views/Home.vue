@@ -1,6 +1,11 @@
 <template>
   <div class="home">
     <!-- banner -start -->
+    <div class="tips">
+      <div class="tips-wrapper">
+        <p>{{tips}}</p>
+      </div>
+    </div>
     <div class="banner">
       <div class="banner-content">
         <div class="banner-content-item banner-content-item-left">
@@ -156,6 +161,7 @@ export default {
   name: 'Home',
   data() {
     return {
+      tips: 'Beware of Any Scam Attempts. $NSURE token has not been deployed yet. Any pools found are impersonations and SCAM ATTEMPTS. Do not engage with such.',
       roadmap: [
         {
           time: '2020Q1',
@@ -247,6 +253,21 @@ export default {
 
 <style lang="less" scoped>
 .home {
+  .tips {
+    background: #fff;
+
+    &-wrapper {
+      width: 1184px;
+      margin: 0 auto;
+      padding: 20px 0;
+
+      p {
+        color: red;
+        font-size: 14px;
+        line-height: 14px;
+      }
+    }
+  }
   .banner {
     color: rgba(255, 255, 255, 0.6);
     padding: 120px 0;
