@@ -17,8 +17,8 @@ jobs:
 
     - name: Install and Build
       run: |
-        npm install
-        npm run-script build
+        yarn
+        npm run build:prod
      
 
     - name: Deploy
