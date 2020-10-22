@@ -6,6 +6,7 @@
         <p>{{tips}}</p>
       </div>
     </div>
+    <Poster/>
     <div class="banner">
       <div class="banner-content">
         <div class="banner-content-item banner-content-item-left">
@@ -110,55 +111,19 @@
     </div>
     <!-- team end -->
 
-    <!-- footer start -->
-    <div class="footer">
-      <div class="pages-wrapper footer-wrapper">
-        <div class="left">
-          <div class="logon-wrapper">
-            <img src="@/assets/images/logo@2x.png" width="40" alt="">
-            <span>Nsure.Network</span>
-          </div>
-        </div>
-        <div class="right footer-right">
-          <div class="footer-right-item">
-            <div class="footer-title">SOCIAL</div>
-            <ul class="footer-right-item-list">
-              <li>
-                <img src="../assets/images/twiiter@2x.png" width="16" alt=""> 
-                <a href="https://twitter.com/Nsure_network" target="_blank" rel="">Twitter</a>
-              </li>
-              <li>
-                <img src="../assets/images/discord@2x.png" width="16" alt=""> 
-                <a href="https://discord.com/invite/nSvAapa" target="_blank" rel="">Discord</a>
-              </li>
-              <li>
-                <img src="../assets/images/telegram@2x.png" width="16" alt="">  
-                <a href="https://t.me/nsurenet" target="_blank" rel="">Telegram</a>
-              </li>
-              <li>
-                <img src="../assets/images/medium@2x.png" width="16" alt="">  
-                <a href="https://medium.com/@nsure_network" target="_blank" rel="">Medium</a>
-              </li>
-            </ul>
-          </div>
-          <div class="footer-right-item">
-            <div class="footer-title">CONTACT</div>
-            <ul class="footer-right-item-list">
-              <li>
-                contact@Nsure.network
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <!-- footer end -->
   </div>
 </template>
 
 <script>
-export default {
+  import Poster from '../components/Poster'
+
+  export default {
   name: 'Home',
+    components:{
+      Poster
+    },
   data() {
     return {
       tips: 'Beware of Any Scam Attempts. $NSURE token has not been deployed yet. Any pools found are impersonations and SCAM ATTEMPTS. Do not engage with such.',
@@ -230,6 +195,14 @@ export default {
           ]
         },
         {
+          name: 'Jessie Wang',
+          job: 'Insurance Model Design & Communication',
+          introduction: [
+            'Majored in Actuarial Science, achieved certified actuary credential (FCAS).',
+            'Previously with Allianz as Product Manager for more than 2 years, in charge of insurance products for Hong Kong and Singapore markets. Prior to that, worked in Aon Analytic Team for around 3 years with extensive experience in actuarial and catastrophe analysis.'
+          ]
+        },
+        {
           name: 'Vincent Bauwens',
           job: 'Marketing',
           introduction: [
@@ -244,7 +217,23 @@ export default {
             'Majored in International Business Trading and Development.',
             'Developed his carreer in Venture Capital space as analyst for different token funds. Currently in the AI*blockchain intersection doing Crypto Data Analytics. Provided strategic consulting, including HTF startups, web3  & Italian Undersecretary of State for the Ministry of Economic Development.'
           ]
-        }
+        },
+        {
+          name: 'Anne Shuai',
+          job: 'UI Designer',
+          introduction: [
+            'Previously in charge of UI designs for Palm Entertainment Xuan Dong Information Technology Co., Ltd., HeShuai has spent her past years providing and managing UI design features for tech companies and digital applications.',
+          ]
+        },
+        {
+          name: 'Aaron Fang',
+          job: 'Full-Stack Developer',
+          introduction: [
+            'Mastered in Golang Language, Proficient in JS TS Dart OC, deep understanding of MCV, MVVM, KVO. ',
+            'Previously engaged with development of blockchain wallets, exchanges and cross-platform development. Past experience includes mid- and back-end development of IM social software in Javascript iOS for large IT companies.'
+          ]
+        },
+
       ]
     }
   }
@@ -491,54 +480,5 @@ export default {
     }
   }
 
-  .footer {
-    color: #fff;
-    background-color: #1B2532;
-    .footer-wrapper {
-      display: flex;
-      justify-content: space-between;
-      padding: 80px 0 100px;
-
-      .logon-wrapper {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-
-        img {
-            margin-right: 20px;
-        }
-      }
-
-      .footer-right {
-        display: flex;
-
-        &-item {
-          margin-left: 40px;
-
-          .footer-title {
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 15px;
-          }
-
-          &-list {
-            font-size: 14px;
-            li {
-              margin-bottom: 15px;
-
-              img {
-                float: left;
-                margin: 2px 10px 0 0;
-              }
-
-              a {
-                color: #fff;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
 }
 </style>
