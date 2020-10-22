@@ -2,8 +2,8 @@ name: CI
 on:
   push:
     branches:
-#      - master
-      - aaron_dev
+      - master
+#      - aaron_dev
 
 jobs:
   main:
@@ -26,4 +26,4 @@ jobs:
       with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BRANCH: gh-pages
-        FOLDER: dist
+        FOLDER: dist/prod
