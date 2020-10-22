@@ -5,5 +5,8 @@ module.exports = {
         config.plugins.push(
             new CopyWebpackPlugin([{ from: 'src/assets/files', to: './' }]),
         )
-    }
+    },
+    publicPath: process.env.NODE_ENV === 'production'
+        ? '/'
+        : '/'
 }
