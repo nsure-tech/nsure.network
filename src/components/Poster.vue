@@ -57,7 +57,7 @@
                 hours: '--',
                 min: '--',
                 seconds: '--',
-                endDate: new Date('2020/10/26')
+                endDate: new Date('2020/10/28 10:00:00')
             };
         },
         mounted: function () {
@@ -69,17 +69,20 @@
                 const now = new Date().valueOf();
                 const msec = end - now;
                 if (msec < 0) {
-                    return this.date_ = `End`;
+                     this.day = `End`;
+                     this.hr = `End`;
+                     this.min = `End`;
+                     this.sec = `End`;
+                    return;
                 }
                 let day = parseInt((msec / 1000 / 60 / 60 / 24).toString());
-                let hr = parseInt((msec / 1000 / 60 / 60 % 24).toString()) + day * 24;
+                let hr = parseInt((msec / 1000 / 60 / 60 % 24).toString()) ;
                 let min = parseInt((msec / 1000 / 60 % 60).toString());
                 let sec = parseInt((msec / 1000 % 60).toString());
                 this.days = day > 9 ? day : '0' + day;
                 this.hours = hr > 9 ? hr : "0" + hr;
                 this.min = min > 9 ? min : "0" + min;
                 this.seconds = sec > 9 ? sec : "0" + sec;
-                this.date_ = `${hr}H ${min}m`;
                 setTimeout(() => {
                     this.countdown();
                 }, 1000);
