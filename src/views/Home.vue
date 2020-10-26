@@ -6,11 +6,11 @@
         <p>{{tips}}</p>
       </div>
     </div>
-    <Poster/>
+    <!--<Poster/>-->
     <div class="banner">
       <div class="banner-content">
         <div class="banner-content-item banner-content-item-left">
-          <div class="banner-des-box"> 
+          <div class="banner-des-box">
             <h1>Open Insurance Platform for Open Finance</h1>
             <h3>Create an insurance market to trade risk</h3>
             <div class="banner-button-wrapper">
@@ -117,12 +117,10 @@
 </template>
 
 <script>
-  import Poster from '../components/Poster'
 
   export default {
   name: 'Home',
     components:{
-      Poster
     },
   data() {
     return {
@@ -362,7 +360,7 @@
           left: 0;
           width: 100%;
           z-index: 0;
-  
+
           img {
             width: 240px;
           }
@@ -374,7 +372,7 @@
           line-height: 1.5;
           margin-bottom: 20px;
         }
-  
+
         p {
           color: #1B2532;
           opacity: 0.4;
