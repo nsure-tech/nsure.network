@@ -1,12 +1,8 @@
 <template>
   <div class="home">
     <!-- banner -start -->
-    <div class="tips">
-      <div class="tips-wrapper">
-        <p>{{tips}}</p>
-      </div>
-    </div>
-    <!--<Poster/>-->
+
+    <Poster/>
     <div class="banner">
       <div class="banner-content">
         <div class="banner-content-item banner-content-item-left">
@@ -111,16 +107,21 @@
     </div>
     <!-- team end -->
 
+    <mechanism/>
 
     <!-- footer end -->
   </div>
 </template>
 
 <script>
+  import Poster from '../components/Poster'
+  import mechanism from '../components/mechanism'
 
   export default {
   name: 'Home',
     components:{
+      Poster,
+      mechanism
     },
   data() {
     return {
