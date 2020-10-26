@@ -2,6 +2,7 @@
   "name": "nsure.network",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/nsure-tech/nsure.network/",
   "scripts": {
     "start": "vue-cli-service serve --mode dev",
     "build:test": "vue-cli-service build --mode test",
@@ -18,8 +19,7 @@
     "mathjs": "^7.1.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
-    "vuex": "^3.4.0",
-    "web3": "^1.2.11"
+    "vuex": "^3.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.0",

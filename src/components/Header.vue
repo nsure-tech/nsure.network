@@ -23,7 +23,10 @@
 </template>
 
 <script>
-export default {
+
+    export default {
+        comments:{
+        },
     data() {
         return {
             menuList: [{
