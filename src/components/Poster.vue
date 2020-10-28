@@ -64,6 +64,10 @@
                 const now = new Date().valueOf();
                 const msec = end - now;
                 if (msec < 0) {
+                    this.days = '00';
+                    this.hours = '00';
+                    this.min = '00';
+                    this.seconds = '00';
                     return this.date_ = `Ended`;
                 }
                 let day = parseInt((msec / 1000 / 60 / 60 / 24).toString());
