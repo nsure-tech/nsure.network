@@ -2,7 +2,8 @@
     <div class="poster">
         <div class="box">
             <h3>Join Liquidity Bootstrapping Pool (LBP) for Nsure</h3>
-            <p>TGE on october <br>28th 11:00 UTC</p>
+            <p>NSURE TGE WILL END ON <br> OCTOBER 30TH 11:00 UTC</p>
+
             <ul>
                 <li>
                     <div>
@@ -52,7 +53,8 @@
                 hours: '--',
                 min: '--',
                 seconds: '--',
-                endDate: new Date('2020/10/28 11:00 UTC+0')
+                endDate: new Date('2020/10/30 11:00 UTC+0')
+
             };
         },
         mounted: function () {
