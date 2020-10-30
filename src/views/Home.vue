@@ -2,7 +2,7 @@
   <div class="home">
     <!-- banner -start -->
 
-    <Poster/>
+
     <div class="banner">
       <div class="banner-content">
         <div class="banner-content-item banner-content-item-left">
