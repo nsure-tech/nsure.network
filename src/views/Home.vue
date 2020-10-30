@@ -114,13 +114,13 @@
 </template>
 
 <script>
-  import Poster from '../components/Poster'
+
   import mechanism from '../components/mechanism'
 
   export default {
   name: 'Home',
     components:{
-      Poster,
+
       mechanism
     },
   data() {

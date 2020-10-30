@@ -2,7 +2,7 @@
   "name": "nsure.network",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/nsure-tech/nsure.network/",
+
   "scripts": {
     "start": "vue-cli-service serve --mode dev",
     "build:test": "vue-cli-service build --mode test",
