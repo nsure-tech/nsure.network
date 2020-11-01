@@ -149,7 +149,7 @@
         },
         {
           time: '2021Q3',
-          list: ['Boostrap on multichain ecosystem; e.g. Polkadot']
+          list: ['Bootstrap on multichain ecosystem; e.g. Polkadot']
         },
         {
           time: '2021Q4',
