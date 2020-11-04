@@ -25,7 +25,7 @@
                         </li>
                         <li>
                             <img src="../assets/images/medium@2x.png" width="16" alt="">
-                            <a href="https://medium.com/@nsure_network" target="_blank" rel="">Medium</a>
+                            <a href="https://nsure-network.medium.com/" target="_blank" rel="">Medium</a>
                         </li>
                     </ul>
                 </div>
