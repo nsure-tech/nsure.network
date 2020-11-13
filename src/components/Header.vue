@@ -11,6 +11,9 @@
                         <a href="/Nsure_WP_0.7.pdf" target="_blank" rel="">Whitepaper</a>
                     </div>
                     <div class="right-list-item">
+                        <a href="https://docs.nsure.network" target="_blank" rel="">Docs</a>
+                    </div>
+                    <div class="right-list-item">
                         <router-link to="/faq">FAQ</router-link>
                     </div>
                     <!-- <div class="right-list-item last">

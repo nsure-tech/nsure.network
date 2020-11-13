@@ -13,6 +13,7 @@
               <!-- <div class="banner-button">
                 <a href="https://form.typeform.com/to/t61JRnFA" target="_blank" rel="">Join Waitlist</a>
               </div> -->
+
               <div class="banner-button">
                 <a href="https://buy.nsure.network/#/">MVP on Rinkeby</a>
               </div>
