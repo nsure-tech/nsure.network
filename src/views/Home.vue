@@ -15,10 +15,10 @@
               </div> -->
 
               <div class="banner-button">
-                <a href="https://buy.nsure.network/#/">MVP on Rinkeby</a>
+                <a target="_blank" href="https://buy.nsure.network/#/">MVP on Rinkeby</a>
               </div>
               <div class="banner-button">
-                <a href="https://staking.nsure.network/#/">Underwriter Program</a>
+                <a target="_blank" href="https://staking.nsure.network/#/">Underwriter Program</a>
               </div>
             </div>
           </div>
