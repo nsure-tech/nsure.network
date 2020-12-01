@@ -27,6 +27,10 @@
                             <img src="../assets/images/medium@2x.png" width="16" alt="">
                             <a href="https://nsure-network.medium.com/" target="_blank" rel="">Medium</a>
                         </li>
+                      <li>
+                        <img src="../assets/images/github.png" width="16" alt="">
+                        <a href="https://github.com/nsure-tech" target="_blank" rel="">GitHub</a>
+                      </li>
                     </ul>
                 </div>
                 <div class="footer-right-item">
