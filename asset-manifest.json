@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "./static/css/main.c11871c6.chunk.css",
-    "main.js": "./static/js/main.9e08c044.chunk.js",
-    "main.js.map": "./static/js/main.9e08c044.chunk.js.map",
+    "main.js": "./static/js/main.87a5cf2a.chunk.js",
+    "main.js.map": "./static/js/main.87a5cf2a.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.72cf58f7.js",
     "runtime-main.js.map": "./static/js/runtime-main.72cf58f7.js.map",
     "static/js/2.e3cd1218.chunk.js": "./static/js/2.e3cd1218.chunk.js",
@@ -20,6 +20,7 @@
     "static/media/based.96acf894.png": "./static/media/based.96acf894.png",
     "static/media/c1.144eda71.png": "./static/media/c1.144eda71.png",
     "static/media/gerald.b447b81c.jpg": "./static/media/gerald.b447b81c.jpg",
+    "static/media/github.1f29989c.png": "./static/media/github.1f29989c.png",
     "static/media/h2.dd003ef3.png": "./static/media/h2.dd003ef3.png",
     "static/media/h3.26085d4f.png": "./static/media/h3.26085d4f.png",
     "static/media/h3_bg.1198568a.png": "./static/media/h3_bg.1198568a.png",
@@ -32,13 +33,13 @@
     "static/media/kirby.550bc1ed.jpg": "./static/media/kirby.550bc1ed.jpg",
     "static/media/leafan.chan.ae57208f.jpg": "./static/media/leafan.chan.ae57208f.jpg",
     "static/media/logo.b3b62c9c.png": "./static/media/logo.b3b62c9c.png",
-    "static/media/vicent.3b60f2c7.jpg": "./static/media/vicent.3b60f2c7.jpg",
+    "static/media/xiaofeng.821ecf54.jpg": "./static/media/xiaofeng.821ecf54.jpg",
     "static/media/zs@2x.ca81d832.png": "./static/media/zs@2x.ca81d832.png"
   },
   "entrypoints": [
     "static/js/runtime-main.72cf58f7.js",
     "static/js/2.e3cd1218.chunk.js",
     "static/css/main.c11871c6.chunk.css",
-    "static/js/main.9e08c044.chunk.js"
+    "static/js/main.87a5cf2a.chunk.js"
   ]
 }
