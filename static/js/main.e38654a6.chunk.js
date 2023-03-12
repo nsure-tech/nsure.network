@@ -731,9 +731,6 @@
                     text: "Nsure Labs",
                     router: "/capital/labs"
                 }, {
-                    text: "Team",
-                    router: "/capital/team"
-                }, {
                     text: "Careers",
                     router: "/capital/join"
                 }],
